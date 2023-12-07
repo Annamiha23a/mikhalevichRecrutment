@@ -11,4 +11,6 @@ public interface FirmService {
     List<Firm> listFirm(String title);
     List<Firm> listFirm();
     void saveFirm(Firm firm, String title,  String field, Integer year, String website, String director, String workPhone) throws IOException;
+    void update(Integer id_firm, String title, String field, Integer year, String website, String director, String workPhone);
+    void removeFirm(int id_firm);
 }

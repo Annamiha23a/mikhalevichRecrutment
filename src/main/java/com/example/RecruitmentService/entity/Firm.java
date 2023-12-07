@@ -28,7 +28,7 @@ public class Firm {
     private String field;
 
     @Column(name="year")
-    private String year;
+    private Integer year;
 
     @Column(name="website")
     private String website;

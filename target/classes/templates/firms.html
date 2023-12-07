@@ -18,7 +18,6 @@
       <h1>Firms</h1>
       <h4>Все фирмы</h4>
     </div>
-
     <div class="container">
       <form action="/firms" method="get">
         <label for="title">Поиск по названию</label>
@@ -50,7 +49,7 @@
           <td th:text="${f.website}"></td>
           <td th:text="${f.director}"></td>
           <td th:text="${f.workPhone}"></td>
-          <td><a href="/firms/details/{id}" class="btn btn-sm btn-outline-success">Подробнее</a></td>
+          <td th:utext="@{<a href='/firms/}+${f.getId_firm()}+@{'>Подробнее</a>}"></td>
         </tr>
         </tbody>
       </table>
@@ -63,8 +62,6 @@
       </div>
     </div>
   </div>
-
   <footer th:insert="blocks/footer :: footer"></footer>
   </body>
-
 </html>

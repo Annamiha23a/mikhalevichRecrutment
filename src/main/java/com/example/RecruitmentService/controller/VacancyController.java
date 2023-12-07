@@ -38,6 +38,6 @@ public class VacancyController {
         vacancyServiceImpl.saveVacancy(vacancy, position, requirements, responsibilities, salary);
         List<Vacancy> vacancies=vacancyServiceImpl.listVacancy();
         model.addAttribute("vacancies", vacancies);
-        return "vacancy";
+        return "redirect:/vacancy";
     }
 }
