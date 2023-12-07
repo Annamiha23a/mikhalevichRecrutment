@@ -1,6 +1,7 @@
 package com.example.RecruitmentService.service.impl;
 
 
+import com.example.RecruitmentService.entity.Firm;
 import com.example.RecruitmentService.entity.Vacancy;
 import com.example.RecruitmentService.repository.VacancyRepository;
 import com.example.RecruitmentService.service.VacancyService;
@@ -37,5 +38,21 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<Vacancy> listVacancy(){
         return vacancyRepository.findAll();
+    }
+    @Override
+    public void update(Integer id_vacancy, String position, String requirements, String responsibilities, Integer salary){
+        Vacancy vacancy = vacancyRepository.findById(id_vacancy).orElse(null);
+        if (vacancy!=null){
+            vacancy.setPosition(position);
+            vacancy.setRequirements(requirements);
+            vacancy.setResponsibilities(responsibilities);
+            vacancy.setSalary(salary);
+        }
+        vacancyRepository.save(vacancy);
+    }
+    @Override
+    public void removeVacancy(int id_vacancy){
+        Vacancy vacancy = findById(id_vacancy);
+        vacancyRepository.delete(vacancy);
     }
 }

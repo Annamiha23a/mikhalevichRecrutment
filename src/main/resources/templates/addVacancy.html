@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Добавление вакансии</title>
@@ -11,6 +11,18 @@
     Описание <input type="text" name="requirements"> <br> <br>
     Условия  <input type="text" name="responsibilities"> <br> <br>
     ЗП <input type="number" name="salary"> <br> <br>
+    <div class="col-md-5">
+        <label for="firm" class="form-label">Фирма</label>
+        <select id="firm" >
+            <option value=""> Выберите </option>
+            <option
+                    th:value="${firms.getId_firm()}"
+                    th:utext="${firms.getTitle()}"/>
+        </select>
+        <div class=" invalid-feedback">
+            Выберите фирму!
+        </div>
+    </div>
     <input type="submit" value="Создать вакансию">
 </form>
 </body>

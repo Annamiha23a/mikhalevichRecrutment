@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Entity
 @Table(name="vacancy")
 @Data
@@ -24,7 +26,7 @@ public class Vacancy {
     private String position;
 
     @Column(name="salary")
-    private String salary;
+    private Integer salary;
 
     @Column(name="responsibilities")
     private String responsibilities;

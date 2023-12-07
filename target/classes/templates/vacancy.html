@@ -42,7 +42,7 @@
             <td th:text="${vac.requirements}"></td>
             <td th:text="${vac.responsibilities}"></td>
             <td th:text="${vac.salary}"></td>
-            <td><a href="/vacancy/details/${vac.id_vacancy}">Подробнее</a></td>
+            <td th:utext="@{<a href='/vacancy/}+${vac.getId_vacancy()}+@{'>Подробнее</a>}"></td>
         </tr>
         </tbody>
     </table>
