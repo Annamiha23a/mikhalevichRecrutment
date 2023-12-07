@@ -44,5 +44,7 @@ public class Firm {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "firm")
     private List<Vacancy> vacancies = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "firm")
+    private List<Recruter> recruters = new ArrayList<>();
 }
 

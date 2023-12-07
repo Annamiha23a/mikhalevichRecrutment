@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaef.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recruter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1>Recruter</h1>
+
+
+    <div class="container">
+        <form action="/recruters" method="get">
+            <label for="specialization">Поиск по специализации</label>
+            <input type="text" name="specialization" id="specialization"><br>
+            <input type="submit" value="Поиск">
+        </form>
+
+        <table class="table table-striped mt-3">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Специализация</th>
+                <th>Кол-во успешных наймов</th>
+                <th>Портфолио</th>
+                <th>Спецификация поиска</th>
+                <th>Дополнительно</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="rec : ${recruters}">
+                <td th:text="${rec.id_recruter}"></td>
+                <td th:text="${rec.specialization}"></td>
+                <td th:text="${rec.numberOfHires}"></td>
+                <td th:text="${rec.portfolio}"></td>
+                <td th:text="${rec.searchSpecification}"></td>
+                <td th:utext="@{<a href='/recruters/}+${rec.getId_recruter()}+@{'>Подробнее</a>}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div style="width: 100%; text-align: center">
+            <br>
+            <button onclick="location.href='/recruters/add'" class="btn btn-success">Добавить рекрутора</button>
+            <br>
+        </div>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

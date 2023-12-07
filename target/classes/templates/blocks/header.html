@@ -5,12 +5,12 @@
                 <a class="navbar-brand" href="/start">Рекрутинг</a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/vacancy">Вакансии</a>
                             </li>
                         </div>
-                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/sell-product">Оценить соискателей</a>
                             </li>
@@ -30,8 +30,28 @@
                                 <a class="nav-link active" aria-current="page" href="/users">Пользователи</a>
                             </li>
                         </div>
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/recruters">Рекрутеры</a>
+                            </li>
+                        </div>
 
                     </ul>
+                    <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                        <li style="color: #ffffff; " class="d-inline-block">
+                            <a  >Пользователь</a>
+                        </li>
+                    </div>
+                    <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">
+                        <li style="color: #ffffff; " class="d-inline-block">
+                            <a  >Администратор</a>
+                        </li>
+                    </div>
+                    <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
+                        <li style="color: #ffffff; " class="d-inline-block">
+                            <a >Рекрутер</a>
+                        </li>
+                    </div>
                     <form class="d-inline-block" name="logout" th:action="@{/logout}" method="post">
                         <button class="btn btn-group-sm" type="submit">Выйти</button>
                     </form>

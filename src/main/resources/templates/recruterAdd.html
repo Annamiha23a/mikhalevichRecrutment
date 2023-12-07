@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание рекрутера</title>
+</head>
+<body>
+<h3>Создать рекрутера</h3>
+<form action="/recruters/add" method="post" >
+    Специализация: <input type="text" name="specialization" > <br><br>
+    Кол-во успешных наймов <input type="number" name="numberOfHires"> <br> <br>
+    Портфолио  <input type="text" name="portfolio"> <br> <br>
+    Спецификация <input type="text" name="searchSpecification"> <br> <br>
+    <input type="submit" value="Добавить рекрутера">
+</form>
+</body>
+</html>
