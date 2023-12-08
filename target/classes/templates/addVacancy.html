@@ -11,18 +11,8 @@
     Описание <input type="text" name="requirements"> <br> <br>
     Условия  <input type="text" name="responsibilities"> <br> <br>
     ЗП <input type="number" name="salary"> <br> <br>
-    <div class="col-md-5">
-        <label for="firm" class="form-label">Фирма</label>
-        <select id="firm" >
-            <option value=""> Выберите </option>
-            <option
-                    th:value="${firms.getId_firm()}"
-                    th:utext="${firms.getTitle()}"/>
-        </select>
-        <div class=" invalid-feedback">
-            Выберите фирму!
-        </div>
-    </div>
+    Задания <input type="text" name="conditions"> <br> <br>
+    Ключевые навыки  <input type="text" name="keySkills"> <br> <br>
     <input type="submit" value="Создать вакансию">
 </form>
 </body>

@@ -19,7 +19,7 @@ public class Firm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_firm")
-    private int id_firm;
+    private Integer id_firm;
 
     @Column(name="title")
     private String title;

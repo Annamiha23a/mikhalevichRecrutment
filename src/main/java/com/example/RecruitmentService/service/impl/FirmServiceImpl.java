@@ -1,24 +1,25 @@
 package com.example.RecruitmentService.service.impl;
 
 import com.example.RecruitmentService.entity.Firm;
-import com.example.RecruitmentService.entity.User;
-import com.example.RecruitmentService.entity.Vacancy;
 import com.example.RecruitmentService.repository.FirmRepository;
-import com.example.RecruitmentService.repository.VacancyRepository;
+import com.example.RecruitmentService.repository.RecruterRepository;
 import com.example.RecruitmentService.service.FirmService;
-import com.example.RecruitmentService.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 public class FirmServiceImpl implements FirmService {
     private FirmRepository firmRepository;
-
+    private RecruterRepository recruterRepository;
     @Autowired
-    public FirmServiceImpl(FirmRepository firmRepository){
+    public FirmServiceImpl(FirmRepository firmRepository, RecruterRepository recruterRepository){
         this.firmRepository=firmRepository;
+        this.recruterRepository=recruterRepository;
     }
     @Override
     public Firm findById(int id) {
@@ -58,4 +59,12 @@ public class FirmServiceImpl implements FirmService {
         Firm firm = findById(id_firm);
         firmRepository.delete(firm);
     }
+    @Override
+    public Firm getFirmByUserName (Principal principal){
+
+        if(principal==null) return new Firm();
+        String username=principal.getName();
+        return firmRepository.findByUserName(username).orElseThrow(()->new NoSuchElementException());
+    }
+
 }

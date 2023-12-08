@@ -20,7 +20,7 @@ public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vacancy")
-    private int id_vacancy;
+    private Integer id_vacancy;
 
     @Column(name="position")
     private String position;
@@ -34,6 +34,12 @@ public class Vacancy {
     @Column(name="requirements")
     private String requirements;
 
+    @Column(name="conditions")
+    private String conditions;
+
+    @Column(name="keySkills")
+    private String keySkills;
+
     private LocalDateTime dateOfCreate;
     @PrePersist
     private void init(){
@@ -44,7 +50,7 @@ public class Vacancy {
 //    @JsonIgnore
 //    private List<Firm> firms;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name="id_firm")
     private Firm firm;
 
 }

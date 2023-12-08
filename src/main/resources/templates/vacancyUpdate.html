@@ -28,6 +28,11 @@
                 <input type="text" class="form-control" name="responsibilities" th:value="${vacancy.getResponsibilities()}">
                 <br><label>Зарплата</label><br>
                 <input type="text" class="form-control" name="salary" th:value="${vacancy.getSalary()}">
+                <label>Задачи</label><br>
+                <input type="text" class="form-control" name="conditions"  th:value="${vacancy.getConditions()}">
+                <br><label>Ключевые навыки</label><br>
+                <input type="text" class="form-control" name="keySkills" th:value="${vacancy.getKeySkills()}">
+                <br><label>Условия</label><br>
                 <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
             </form>
         </div>

@@ -1,5 +1,6 @@
 package com.example.RecruitmentService.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,10 +47,17 @@ public class User {
 	@Column(name = "active")
 	private boolean active;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
 	private Set<Role> roles;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private Recruter recruter;
+
+	@Override
+	public String toString(){
+		return "id" + id + username;
+	}
 }

@@ -1,6 +1,8 @@
 package com.example.RecruitmentService.controller;
 
 import com.example.RecruitmentService.entity.Firm;
+import com.example.RecruitmentService.entity.Recruter;
+import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.entity.Vacancy;
 import com.example.RecruitmentService.service.VacancyService;
 import com.example.RecruitmentService.service.impl.FirmServiceImpl;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -55,16 +58,22 @@ public class VacancyController {
 
 
     @PostMapping("/vacancy/add")
-    public String addVacancy(Vacancy vacancy, @RequestParam("position") String position, @RequestParam("requirements") String requirements, @RequestParam("responsibilities") String responsibilities, @RequestParam("salary") Integer salary, Model model) throws IOException {
-        vacancyServiceImpl.saveVacancy(vacancy, position, requirements, responsibilities, salary);
+    public String addVacancy(Principal principal, Vacancy vacancy, @RequestParam("position") String position, @RequestParam("requirements") String requirements, @RequestParam("responsibilities") String responsibilities, @RequestParam("salary") Integer salary , @RequestParam String conditions, @RequestParam String keySkills, Model model) throws IOException {
+        Firm firm=firmServiceImpl.getFirmByUserName(principal);
+        Integer id_firm=firm.getId_firm();
+        System.out.println("id фирмы"+id_firm);
+        vacancyServiceImpl.saveVacancy(vacancy, position, requirements, responsibilities, salary, conditions, keySkills,  firm);
         List<Vacancy> vacancies=vacancyServiceImpl.listVacancy();
         model.addAttribute("vacancies", vacancies);
         return "redirect:/vacancy";
     }
 
     @PostMapping("/vacancy/{id_vacancy}/update")
-    public String postUpdateVacancy(@PathVariable Integer id_vacancy,@RequestParam String position, @RequestParam String requirements, @RequestParam String responsibilities, @RequestParam Integer salary){
-        vacancyServiceImpl.update(id_vacancy,position,requirements, responsibilities, salary);
+    public String postUpdateVacancy(Principal principal, @PathVariable Integer id_vacancy,@RequestParam String position, @RequestParam String requirements, @RequestParam String responsibilities, @RequestParam Integer salary, @RequestParam String conditions, @RequestParam String keySkills){
+        Firm firm=firmServiceImpl.getFirmByUserName(principal);
+        Integer id_firm=firm.getId_firm();
+        System.out.println("id фирмы"+id_firm);
+        vacancyServiceImpl.update(id_vacancy,position,requirements, responsibilities, salary, conditions, keySkills, id_firm);
         return "redirect:/vacancy";
     }
 
