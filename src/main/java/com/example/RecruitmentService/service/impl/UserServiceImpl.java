@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
 	    user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
 		Role role = list.isEmpty()? roleRepository.findByRole("ROLE_ADMIN") : roleRepository.findByRole("ROLE_USER");
-		//Role role = roleRepository.findByRole("ROLE_ADMIN");
 		user.setRoles(new HashSet<>(List.of(role)));
 		if (user.getUsername()!=null) {
 			emailService.sendSimpleMail(details);

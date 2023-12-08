@@ -45,9 +45,8 @@ public class VacancyServiceImpl implements VacancyService {
         return vacancyRepository.findAll();
     }
     @Override
-    public void update(Integer id_vacancy, String position, String requirements, String responsibilities, Integer salary, String conditions, String keySkills, Integer id_firm){
+    public void update(Integer id_vacancy, String position, String requirements, String responsibilities, Integer salary, String conditions, String keySkills){
         Vacancy vacancy = vacancyRepository.findById(id_vacancy).orElse(null);
-        Firm firm = firmRepository.findById(id_firm).orElseThrow(()->new NoSuchElementException());
         if (vacancy!=null){
             vacancy.setPosition(position);
             vacancy.setRequirements(requirements);
@@ -55,7 +54,6 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setSalary(salary);
             vacancy.setConditions(conditions);
             vacancy.setKeySkills(keySkills);
-            vacancy.setFirm(firm);
         }
         vacancyRepository.save(vacancy);
     }

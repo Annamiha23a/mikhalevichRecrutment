@@ -10,6 +10,6 @@ public interface VacancyService {
     List<Vacancy> listVacancy(String position);
     List<Vacancy> listVacancy();
     void saveVacancy(Vacancy vacancy, String position,  String requirements,  String responsibilities,  Integer salary, String conditions, String keySkills, Firm firm) throws IOException;
-    void update( Integer id_vacancy, String position,  String requirements,  String responsibilities,  Integer salary, String conditions, String keySkills, Integer id_firm);
+    void update( Integer id_vacancy, String position,  String requirements,  String responsibilities,  Integer salary, String conditions, String keySkills);
     void removeVacancy(int id_vacancy);
 }

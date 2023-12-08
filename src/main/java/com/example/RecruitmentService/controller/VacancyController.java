@@ -69,11 +69,8 @@ public class VacancyController {
     }
 
     @PostMapping("/vacancy/{id_vacancy}/update")
-    public String postUpdateVacancy(Principal principal, @PathVariable Integer id_vacancy,@RequestParam String position, @RequestParam String requirements, @RequestParam String responsibilities, @RequestParam Integer salary, @RequestParam String conditions, @RequestParam String keySkills){
-        Firm firm=firmServiceImpl.getFirmByUserName(principal);
-        Integer id_firm=firm.getId_firm();
-        System.out.println("id фирмы"+id_firm);
-        vacancyServiceImpl.update(id_vacancy,position,requirements, responsibilities, salary, conditions, keySkills, id_firm);
+    public String postUpdateVacancy( @PathVariable Integer id_vacancy,@RequestParam String position, @RequestParam String requirements, @RequestParam String responsibilities, @RequestParam Integer salary, @RequestParam String conditions, @RequestParam String keySkills){
+        vacancyServiceImpl.update(id_vacancy,position,requirements, responsibilities, salary, conditions, keySkills);
         return "redirect:/vacancy";
     }
 

@@ -56,6 +56,10 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private Recruter recruter;
 
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	private Applicant applicant;
+
 	@Override
 	public String toString(){
 		return "id" + id + username;
