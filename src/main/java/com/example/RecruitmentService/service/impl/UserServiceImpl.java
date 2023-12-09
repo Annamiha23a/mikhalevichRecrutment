@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void removeUser(int id) {
+	public void removeUser(Integer id) {
 		User user = findUserById(id);
 		userRepository.delete(user);
 	}
@@ -87,9 +87,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUserById(int id) {
+	public User findUserById(Integer id) {
 		return userRepository.findUserById(id)
 				.orElseThrow(()->new NoSuchElementException());
+	}
+
+	public User getUserByUserName (Principal principal){
+		if(principal==null) return new User();
+		String username=principal.getName();
+		return userRepository.findUserByUsername(username).orElseThrow(()->new NoSuchElementException());
 	}
 
 

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaef.org">
+<head>
+    <title>Соискатель</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+
+<div class="album py-5 bg-light">
+    <div class="container mt-5">
+        <h1>Мои данные</h1>
+    </div>
+    <div class="container">
+        <div  class="alert alert-success mt-2">
+            <h4 th:utext="'Специализация: '+${applicant.specialization}"></h4>
+            <h4 th:utext="'Образование: '+${applicant.education}"></h4>
+            <h4 th:utext="'Опыт: '+${applicant.experience}"></h4>
+            <h4 th:utext="'Знание языков: '+${applicant.language}"></h4>
+            <h4 th:utext="'Рейтинг: '+${applicant.rating}"></h4>
+            <div class="btn-group">
+                <form th:action="'/applicants/'+${applicant.getId_applicant}+'/update/user'" method="get">
+                    <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
+                </form>
+                <form th:action="'/applicants/'+${applicant.getId_applicant}+'/remove/user'" method="post">
+                    <button class="btn btn-sm btn-danger" type="submit">Удалить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
+

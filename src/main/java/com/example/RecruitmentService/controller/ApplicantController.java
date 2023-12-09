@@ -2,13 +2,16 @@ package com.example.RecruitmentService.controller;
 
 import com.example.RecruitmentService.entity.Applicant;
 import com.example.RecruitmentService.entity.Recruter;
+import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.service.impl.ApplicantServiceImpl;
+import com.example.RecruitmentService.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -16,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/applicants")
 public class ApplicantController {
     private final ApplicantServiceImpl applicantServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @GetMapping("")
     public String findAllApplicant(Model model, @RequestParam(name="specialization", required = false) String specialization ){
@@ -44,12 +48,28 @@ public class ApplicantController {
         model.addAttribute("applicant",applicant);
         return "applicantUpdate";
     }
+    @GetMapping("/{id}/update/user")
+    public String updateApplicantUser(@PathVariable(value = "id") Integer id, Model model, Principal principal) {
+        User user=userServiceImpl.getUserByUserName(principal);
+        Integer id_applicant=user.getApplicant().getId_applicant();
+        Applicant applicant= applicantServiceImpl.findById(id_applicant);
+        model.addAttribute("applicant",applicant);
+        return "applicantUpdateUser";
+    }
 
     @GetMapping("/calculation")
     public String calculationRating(Model model){
         return "calculation";
     }
 
+    @GetMapping("/user")
+    public String infoApplicant(Principal principal, Model model){
+        User user=userServiceImpl.getUserByUserName(principal);
+        Integer id=user.getApplicant().getId_applicant();
+        Applicant applicant= applicantServiceImpl.findById(id);
+        model.addAttribute("applicant", applicant);
+        return "applicant-detailsUser";
+    }
 
     @PostMapping("/add")
     public String addApplicant(Applicant applicant, @RequestParam String specialization, @RequestParam String education, @RequestParam String experience, @RequestParam String language,@RequestParam Double rating, Model model) throws IOException {
@@ -65,10 +85,29 @@ public class ApplicantController {
         return "redirect:/applicants";
     }
 
+    @PostMapping("/{id}/update/user")
+    public String postUpdateApplicantUser(Principal principal, Model model, @PathVariable Integer id,@RequestParam String specialization, @RequestParam String education, @RequestParam String experience, @RequestParam String language, @RequestParam Double rating){
+        applicantServiceImpl.update(id,specialization, education, experience, language, rating);
+        User user=userServiceImpl.getUserByUserName(principal);
+        Integer id_applicant=user.getApplicant().getId_applicant();
+        Applicant applicant= applicantServiceImpl.findById(id_applicant);
+        model.addAttribute("applicant",applicant);
+        return "applicant-detailsUser";
+    }
+
 
     @PostMapping("/{id}/remove")
     public String removeApplicant(@PathVariable(value = "id") Integer id, Model model) {
         applicantServiceImpl.removeApplicant(id);
         return "redirect:/applicants";
+    }
+    @PostMapping("/{id}/remove/user")
+    public String removeApplicantUser(Principal principal, @PathVariable(value = "id") Integer id, Model model) {
+        User user=userServiceImpl.getUserByUserName(principal);
+        Integer id_applicant=user.getApplicant().getId_applicant();
+        Applicant applicant= applicantServiceImpl.findById(id_applicant);
+        applicantServiceImpl.removeApplicant(id_applicant);
+        model.addAttribute("applicant",applicant);
+        return "applicant-detailsUser";
     }
 }

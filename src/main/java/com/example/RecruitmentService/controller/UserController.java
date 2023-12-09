@@ -53,7 +53,7 @@ public class UserController {
 	@GetMapping("/user/{id}/update")
 	public String updateUser(@PathVariable(value = "id") int id, Model model) {
 		User user = userService.findUserById(id);
-		List<User> users = new ArrayList<>();//? почему тут список? Так было в других методах
+		List<User> users = new ArrayList<>();
 		users.add(user);
 		model.addAttribute("user",users);
 		return "updateUser";

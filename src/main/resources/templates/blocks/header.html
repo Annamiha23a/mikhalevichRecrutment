@@ -46,6 +46,23 @@
                             </li>
                         </div>
 
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/applicants/user" >Данные соискателя</a>
+                            </li>
+                        </div>
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/responses">Вакансии</a>
+                            </li>
+                        </div>
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/responses">Мои отклики</a>
+                            </li>
+                        </div>
+
+
                     </ul>
                     <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
                         <li style="color: #ffffff; " class="d-inline-block">
