@@ -45,6 +45,11 @@ public class ApplicantController {
         return "applicantUpdate";
     }
 
+    @GetMapping("/calculation")
+    public String calculationRating(Model model){
+        return "calculation";
+    }
+
 
     @PostMapping("/add")
     public String addApplicant(Applicant applicant, @RequestParam String specialization, @RequestParam String education, @RequestParam String experience, @RequestParam String language,@RequestParam Double rating, Model model) throws IOException {

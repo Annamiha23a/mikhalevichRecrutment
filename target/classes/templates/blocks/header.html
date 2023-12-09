@@ -12,7 +12,7 @@
                         </div>
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/sell-product">Оценить соискателей</a>
+                                <a class="nav-link active" aria-current="page" href="/applicants/calculation">Оценить соискателей</a>
                             </li>
                         </div>
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">
@@ -38,6 +38,11 @@
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/applicants">Соискатели</a>
+                            </li>
+                        </div>
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/responses">Отклики</a>
                             </li>
                         </div>
 

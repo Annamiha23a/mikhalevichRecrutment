@@ -20,15 +20,11 @@
   <div class="container">
     <div  class="alert alert-success mt-2">
       <h4 th:utext="'Специализация: '+${applicant.specialization}"></h4>
-
       <h4 th:utext="'Образование: '+${applicant.education}"></h4>
-
       <h4 th:utext="'Опыт: '+${applicant.experience}"></h4>
-
       <h4 th:utext="'Знание языков: '+${applicant.language}"></h4>
       <h4 th:utext="'Рейтинг: '+${applicant.rating}"></h4>
       <div class="btn-group">
-
         <form th:action="'/applicants/'+${applicant.getId_applicant}+'/update'" method="get">
           <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
         </form>
