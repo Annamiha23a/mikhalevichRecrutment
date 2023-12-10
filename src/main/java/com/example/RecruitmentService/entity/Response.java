@@ -33,6 +33,9 @@ public class Response {
     @Column(name="comment")
     private String comment;
 
+    @Column(name="gitHub")
+    private String gitHub;
+
     @JsonIgnore
     @OneToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
     @JoinColumn(name="id_vacancy")

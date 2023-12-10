@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -38,7 +39,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/registration")
-	public String addUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+	public String addUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) throws IOException {
 		userService.save(user);
 		return "start";
 	}

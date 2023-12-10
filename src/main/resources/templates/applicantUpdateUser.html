@@ -30,7 +30,7 @@
         <input type="text" class="form-control" name="language"
                th:value="${applicant.getLanguage()}">
         <br><label>Рейтинг</label><br>
-        <input type="text" class="form-control" name="rating" th:value="${applicant.getRating()}">
+        <h5 th:utext="${applicant.rating}"></h5>
         <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
       </form>
     </div>

@@ -30,13 +30,24 @@ public class ResponseController {
     }
     @GetMapping("/{id}")
     public String findResponse(@PathVariable("id") Integer id, Model model) {
-        Response response= responseServiceImpl.findById(id);
-        if(response.getStatus()=="Не просмотрено"){
+        Response response = responseServiceImpl.findById(id);
+        if ("Не просмотрено".equals(response.getStatus())) {
             response.setStatus("Просмотрено");
             responseServiceImpl.updateStatus(id, "Просмотрено");
         }
         model.addAttribute("response", response);
         return "response-details";
+    }
+    @GetMapping("/my")
+    public String findMyResponse(Principal principal, Model model, @RequestParam(name="status", required = false) String status){
+        User user=userServiceImpl.getUserByUserName(principal);
+        Applicant applicant=user.getApplicant();
+        List<Response> responses;
+        responses=responseServiceImpl.findByApplicantAndStatus(applicant, status);
+       // List<Response> responses=responseServiceImpl.listResponse(status);
+        model.addAttribute("responses", responses);
+        return "responseUser";
+
     }
 
     @PostMapping("/{id}/update/accept")

@@ -1,9 +1,11 @@
 package com.example.RecruitmentService.service.impl;
 
+import com.example.RecruitmentService.entity.Applicant;
 import com.example.RecruitmentService.entity.Role;
 import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.mail.EmailDetails;
 import com.example.RecruitmentService.mail.EmailService;
+import com.example.RecruitmentService.repository.ApplicantRepository;
 import com.example.RecruitmentService.repository.RoleRepository;
 import com.example.RecruitmentService.repository.UserRepository;
 import com.example.RecruitmentService.service.UserService;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +23,8 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
+	private ApplicantRepository applicantRepository;
+	private ApplicantServiceImpl applicantServiceImpl;
 	private List<User> list ;
 
 	@Autowired
@@ -28,25 +33,32 @@ public class UserServiceImpl implements UserService {
 	private EmailService emailService;
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, ApplicantServiceImpl applicantServiceImpl,  ApplicantRepository applicantRepository) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.list = userRepository.findAll();
+		this.applicantServiceImpl=applicantServiceImpl;
+		this.applicantRepository=applicantRepository;
 	}
 
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
-	public User save(User user) {
+	public User save(User user)  {
 		EmailDetails details = new EmailDetails(user.getUsername(),"Добро пожаловать на сервис оценки кинофильмов. Ваш логин:" + user.getUsername() +". Ваш пароль:"+user.getPassword(), "Регистрация на сервисе", null);
 	    user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
 		Role role = list.isEmpty()? roleRepository.findByRole("ROLE_ADMIN") : roleRepository.findByRole("ROLE_USER");
 		user.setRoles(new HashSet<>(List.of(role)));
+		Applicant applicant=new Applicant();
+		userRepository.save(user);
+		applicant.setUser(user);
+		applicantRepository.save(applicant);
 		if (user.getUsername()!=null) {
 			emailService.sendSimpleMail(details);
 		}
+
 		return userRepository.save(user);
 	}
 

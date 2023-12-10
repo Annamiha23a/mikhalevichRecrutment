@@ -43,7 +43,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public List<Response> listResponse(String status) {
-        if(status!= null) return responseRepository.findByStatusContaining(status);
+        if(status!= null) return responseRepository.findByStatus(status);
         return responseRepository.findAll();
     }
 
@@ -53,7 +53,7 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public void saveResponse(Response response, String status, String comment, Vacancy vacancy, Applicant applicant) throws IOException {
+    public void saveResponse(Response response, String status, String comment, String gitHub, Vacancy vacancy, Applicant applicant) throws IOException {
         Response responseFromDb = responseRepository.save(response);
         responseFromDb.setVacancy(vacancy);
         responseFromDb.setApplicant(applicant);
@@ -61,11 +61,12 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public void update(Integer id_response, String status, String comment, Vacancy vacancy, Applicant applicant) {
+    public void update(Integer id_response, String status, String comment, String gitHub, Vacancy vacancy, Applicant applicant) {
         Response response=responseRepository.findById(id_response).orElse(null);
         if(response!=null){
             response.setStatus(status);
             response.setComment(comment);
+            response.setGitHub(gitHub);
             response.setVacancy(vacancy);
             response.setApplicant(applicant);
         }
@@ -109,5 +110,18 @@ public class ResponseServiceImpl implements ResponseService {
         if(principal==null) return new User();
         String username=principal.getName();
         return userRepository.findUserByUsername(username).orElseThrow(()->new NoSuchElementException());
+    }
+
+    public List<Response>  findByApplicant(Applicant applicant){
+        if(applicant!= null) return responseRepository.findByApplicant(applicant);
+        return null;
+    }
+
+    public List<Response>  findByApplicantAndStatus(Applicant applicant, String status){
+        List<Response> responses;
+        if(status!= null) {
+            return responseRepository.findByApplicantAndStatus(applicant, status);
+              }
+        return responseRepository.findByApplicant(applicant);
     }
 }

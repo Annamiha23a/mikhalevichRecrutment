@@ -1,11 +1,10 @@
 package com.example.RecruitmentService.controller;
 
-import com.example.RecruitmentService.entity.Firm;
-import com.example.RecruitmentService.entity.Recruter;
-import com.example.RecruitmentService.entity.User;
-import com.example.RecruitmentService.entity.Vacancy;
+import com.example.RecruitmentService.entity.*;
 import com.example.RecruitmentService.service.VacancyService;
 import com.example.RecruitmentService.service.impl.FirmServiceImpl;
+import com.example.RecruitmentService.service.impl.ResponseServiceImpl;
+import com.example.RecruitmentService.service.impl.UserServiceImpl;
 import com.example.RecruitmentService.service.impl.VacancyServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -27,12 +26,22 @@ public class VacancyController {
 
     private final VacancyServiceImpl vacancyServiceImpl;
     private final FirmServiceImpl firmServiceImpl;
+    private final UserServiceImpl userServiceImpl;
+
+    private final ResponseServiceImpl responseServiceImpl;
 
     @GetMapping("/vacancy")
     public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position) {
         List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position);
         model.addAttribute("vacancies", vacancies);
         return "vacancy";
+    }
+
+    @GetMapping("/vacancy/user")
+    public String findAllVacancyUser(Model model, @RequestParam(name="position", required = false) String position) {
+        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position);
+        model.addAttribute("vacancies", vacancies);
+        return "vacancyUser";
     }
 
     @GetMapping("/vacancy/add")
@@ -47,6 +56,23 @@ public class VacancyController {
         Vacancy vacancy= vacancyServiceImpl.findById(id_vacancy);
         model.addAttribute("vacancy", vacancy);
         return "vacancy-details";
+    }
+
+    @GetMapping("/vacancy/{id_vacancy}/user")
+    public String findVacancyUser(@PathVariable("id_vacancy") Integer id_vacancy, Model model) {
+        Vacancy vacancy= vacancyServiceImpl.findById(id_vacancy);
+        model.addAttribute("vacancy", vacancy);
+        return "vacancy-detailsUser";
+    }
+   // /response/add
+
+    @GetMapping("/vacancy/{id_vacancy}/response/add")
+    public String addResponseUser(@PathVariable("id_vacancy") Integer id_vacancy, Model model, Principal principal) {
+        User user=userServiceImpl.getUserByUserName(principal);
+        Vacancy vacancy= vacancyServiceImpl.findById(id_vacancy);
+        model.addAttribute("vacancy", vacancy);
+        model.addAttribute("user", user);
+        return "responseAdd";
     }
 
     @GetMapping("vacancy/{id_vacancy}/update")
@@ -79,5 +105,17 @@ public class VacancyController {
     public String removeVacancy(@PathVariable(value = "id_vacancy") Integer id_vacancy, Model model) {
         vacancyServiceImpl.removeVacancy(id_vacancy);
         return "redirect:/vacancy";
+    }
+
+    @PostMapping("/vacancy/{id_vacancy}/response/add")
+    public String addResponse(Principal principal, Response response, @PathVariable Integer id_vacancy, @RequestParam String comment, @RequestParam String gitHub, Model model) throws IOException {
+        User user=userServiceImpl.getUserByUserName(principal);
+        Applicant applicant=user.getApplicant();
+        Vacancy vacancy= vacancyServiceImpl.findById(id_vacancy);
+        response.setStatus("Не просмотрено");
+        responseServiceImpl.saveResponse(response, "Не просмотрено", comment, gitHub, vacancy, applicant);
+        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy();
+        model.addAttribute("vacancies", vacancies);
+        return "vacancyUser";
     }
 }

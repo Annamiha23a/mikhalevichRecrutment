@@ -12,10 +12,11 @@ public interface ResponseService {
     Response findById(int id);
     List<Response> listResponse(String status);
     List<Response> listResponse();
-    void saveResponse(Response response, String status, String comment, Vacancy vacancy, Applicant applicant) throws IOException;
-    void update( Integer id_response, String status, String comment, Vacancy vacancy, Applicant applicant);
+    void saveResponse(Response response, String status, String comment, String gitHub, Vacancy vacancy, Applicant applicant) throws IOException;
+    void update( Integer id_response, String status, String comment, String gitHub, Vacancy vacancy, Applicant applicant);
     void updateStatus( Integer id_response, String status);
     void removeResponse(int id_response);
 
     void sendByMail(Integer id, String test, Integer id_user);
+    List<Response> findByApplicant(Applicant applicant);
 }

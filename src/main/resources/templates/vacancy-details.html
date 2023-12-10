@@ -15,7 +15,7 @@
 
 <div class="album py-5 bg-light">
     <div class="container mt-5">
-        <h1>Фирма</h1>
+        <h1 th:utext="'Вакансия №: '+${vacancy.id_vacancy}"></h1>
     </div>
     <div class="container">
         <div  class="alert alert-success mt-2">
@@ -26,7 +26,7 @@
             <h4 th:utext="'Задачи: '+${vacancy.conditions}"></h4>
             <h4 th:utext="'Ключевые навыки: '+${vacancy.keySkills}"></h4>
             <h4 th:utext="'Дата опубликования вакансии: '+${vacancy.dateOfCreate}"></h4>
-<!--            <h4 th:utext="'Фирма: '+${vacancy.id_firm}"></h4>-->
+            <h4 th:utext="'Фирма: '+${vacancy.firm.title}"></h4>
 
             <div class="btn-group">
 

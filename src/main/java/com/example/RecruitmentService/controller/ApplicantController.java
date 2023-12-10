@@ -86,8 +86,8 @@ public class ApplicantController {
     }
 
     @PostMapping("/{id}/update/user")
-    public String postUpdateApplicantUser(Principal principal, Model model, @PathVariable Integer id,@RequestParam String specialization, @RequestParam String education, @RequestParam String experience, @RequestParam String language, @RequestParam Double rating){
-        applicantServiceImpl.update(id,specialization, education, experience, language, rating);
+    public String postUpdateApplicantUser(Principal principal, Model model, @PathVariable Integer id,@RequestParam String specialization, @RequestParam String education, @RequestParam String experience, @RequestParam String language){
+        applicantServiceImpl.updateUser(id,specialization, education, experience, language);
         User user=userServiceImpl.getUserByUserName(principal);
         Integer id_applicant=user.getApplicant().getId_applicant();
         Applicant applicant= applicantServiceImpl.findById(id_applicant);

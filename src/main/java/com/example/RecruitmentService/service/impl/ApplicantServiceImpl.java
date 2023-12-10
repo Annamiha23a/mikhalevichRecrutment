@@ -52,6 +52,17 @@ public class ApplicantServiceImpl implements ApplicantServise {
         applicantRepository.save(applicant);
     }
 
+    public void updateUser(Integer id_applicant, String specialization, String education, String experience, String language) {
+        Applicant applicant=applicantRepository.findById(id_applicant).orElse(null);
+        if(applicant!=null){
+            applicant.setSpecialization(specialization);
+            applicant.setEducation(education);
+            applicant.setExperience(experience);
+            applicant.setLanguage(language);
+        }
+        applicantRepository.save(applicant);
+    }
+
     @Override
     public void updateRating(Integer id_applicant, Double rating) {
         Applicant applicant=applicantRepository.findById(id_applicant).orElse(null);

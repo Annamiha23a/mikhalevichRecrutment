@@ -26,15 +26,15 @@
             <h4 th:utext="'Задачи: '+${vacancy.conditions}"></h4>
             <h4 th:utext="'Ключевые навыки: '+${vacancy.keySkills}"></h4>
             <h4 th:utext="'Дата опубликования вакансии: '+${vacancy.dateOfCreate}"></h4>
-            <h4 th:utext="'Фирма: '+${vacancy.firm.title}"></h4>
+                        <h4 th:utext="'Фирма: '+${vacancy.firm.title}"></h4>
 
             <div class="btn-group">
 
-                <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/update'" method="get">
-                    <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
+                <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/response/add'" method="get">
+                    <button class="btn btn-sm btn-success" type="submit">Откликнуться</button>
                 </form>
                 <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/remove'" method="post">
-                    <button class="btn btn-sm btn-danger" type="submit">Удалить</button>
+                    <button class="btn btn-sm btn-success" type="submit">Просмотреть фирму</button>
                 </form>
             </div>
         </div>
