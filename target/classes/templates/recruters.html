@@ -12,18 +12,17 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-
+<div class="album py-5 bg-light">
 <div class="container mt-5">
     <h1>Рекрутеры</h1>
-
-
+</div>
     <div class="container">
         <form action="/recruters" method="get">
             <label for="specialization">Поиск по специализации</label>
             <input type="text" name="specialization" id="specialization"><br>
-            <input type="submit" value="Поиск">
+            <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
         </form>
-
+        <br>
         <table class="table table-striped mt-3">
             <thead>
             <tr>
@@ -49,7 +48,7 @@
 
         <div style="width: 100%; text-align: center">
             <br>
-            <button onclick="location.href='/recruters/add'" class="btn btn-success">Зарегистрировать рекрутора</button>
+            <button onclick="location.href='/recruters/add'" class="btn w-100 btn-lg btn-success">Зарегистрировать рекрутора</button>
             <br>
         </div>
     </div>

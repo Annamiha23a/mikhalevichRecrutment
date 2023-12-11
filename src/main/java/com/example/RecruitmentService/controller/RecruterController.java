@@ -1,7 +1,9 @@
 package com.example.RecruitmentService.controller;
 
+import com.example.RecruitmentService.entity.Firm;
 import com.example.RecruitmentService.entity.Recruter;
 import com.example.RecruitmentService.entity.User;
+import com.example.RecruitmentService.service.impl.FirmServiceImpl;
 import com.example.RecruitmentService.service.impl.RecruterServiceImpl;
 import com.example.RecruitmentService.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class RecruterController {
     private final RecruterServiceImpl recruterServiceImpl;
     private final UserServiceImpl userServiceImpl;
     //private final FirmServiceImpl firmServiceImpl;
+    private final FirmServiceImpl firmServiceImpl;
 
     @GetMapping("")
     public String findAllRecruter(Model model, @RequestParam(name="specialization", required = false) String specialization) {
@@ -31,8 +34,9 @@ public class RecruterController {
 
     @GetMapping("/add")
     public String addRecrut(Model model){
-//        List<User> users = userServiceImpl.listFirm();
-//        model.addAttribute("users", users);
+
+        List<Firm> firms = firmServiceImpl.listFirm();
+        model.addAttribute("firms", firms);
         return "recruterAdd";
     }
 
@@ -52,7 +56,7 @@ public class RecruterController {
 
 
     @PostMapping("/add")
-    public String addRecruter(Recruter recruter, User user, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String username, @RequestParam String password, @RequestParam String phone, @RequestParam String bio, @RequestParam String  country, @RequestParam String age, @RequestParam String specialization, @RequestParam Integer numberOfHires, @RequestParam String portfolio, @RequestParam String searchSpecification, Model model) throws IOException {
+    public String addRecruter(Recruter recruter, User user, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String username, @RequestParam String password, @RequestParam String phone, @RequestParam String bio, @RequestParam String  country, @RequestParam String age, @RequestParam String specialization, @RequestParam Integer numberOfHires, @RequestParam String portfolio, @RequestParam String searchSpecification, @RequestParam Integer id_firm, Model model) throws IOException {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhone(phone);
@@ -60,6 +64,8 @@ public class RecruterController {
         user.setAge(age);
         userServiceImpl.saveRecruter(user, firstName, lastName, username, password, phone, bio, country, age);
         recruter.setUser(user);
+        Firm firm=firmServiceImpl.findById(id_firm);
+        recruter.setFirm(firm);
         recruterServiceImpl.saveRecruter(recruter, specialization, numberOfHires, portfolio, searchSpecification);
         List<Recruter> recruters=recruterServiceImpl.listRecruter();
         model.addAttribute("recruters", recruters);

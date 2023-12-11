@@ -12,14 +12,15 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-
+<div class="album py-5 bg-light">
 <div class="container mt-5">
-    <h2>Applicant</h2>
+    <h1>Соискатели</h1>
+</div>
     <div class="container">
         <form action="/applicants" method="get">
             <label for="specialization">Поиск по специализации</label>
             <input type="text" name="specialization" id="specialization"><br>
-            <input type="submit" value="Поиск">
+            <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
         </form>
 
         <table class="table table-striped mt-3">
@@ -46,12 +47,6 @@
             </tr>
             </tbody>
         </table>
-
-        <div style="width: 100%; text-align: center">
-            <br>
-            <button onclick="location.href='/applicants/add'" class="btn btn-success">Добавить соискателя</button>
-            <br>
-        </div>
     </div>
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>

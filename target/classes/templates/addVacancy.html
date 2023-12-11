@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Добавление вакансии</title>
+    <title>Создание фирмы</title> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
-<h3>Добавить вакансию</h3>
-<form action="/vacancy/add" method="post" >
-    Позиция: <input type="text" name="position" > <br><br>
-    Описание <input type="text" name="requirements"> <br> <br>
-    Условия  <input type="text" name="responsibilities"> <br> <br>
-    ЗП <input type="number" name="salary"> <br> <br>
-    Задания <input type="text" name="conditions"> <br> <br>
-    Ключевые навыки  <input type="text" name="keySkills"> <br> <br>
-    <input type="submit" value="Создать вакансию">
-</form>
+<header th:insert="blocks/header :: header"></header>
+
+
+<div class="album py-5 bg-light">
+    <div class="container mt-5">
+        <h1>Опубликовать вакансию</h1>
+    </div>
+    <div class="container">
+        <div  class="alert alert-success mt-2">
+            <form action="/vacancy/add" method="post" >
+                <label>  Позиция</label><br>
+                <input type="text" class="form-control" name="position"  >
+                <br><label> Описание</label><br>
+                <input type="text" class="form-control" name="requirements">
+                <br><label>Условия </label><br>
+                <input type="text" class="form-control" name="responsibilities" >
+                <br><label>Заработная плата </label><br>
+                <input type="number" class="form-control" name="salary" >
+                <br><label>Задания </label><br>
+                <input type="text" class="form-control" name="conditions" >
+                <br><label>Ключевые навыки </label><br>
+                <input type="text" class="form-control" name="keySkills" ><br>
+                <button class="btn w-100 btn-lg btn-success" type="submit">Опубликовать вакансию</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
+
+
+

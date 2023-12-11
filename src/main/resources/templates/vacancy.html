@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vacancy</title>
+    <title>Вакансии</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="css/footer.css">
@@ -14,14 +14,14 @@
 <header th:insert="blocks/header :: header"></header>
 
 <div class="container mt-5">
-    <h1>Vacancy</h1>
+    <h1>Вакансии</h1>
 
 
 <div class="container">
     <form action="/vacancy" method="get">
         <label for="position">Поиск по позиции</label>
         <input type="text" name="position" id="position"><br>
-        <input type="submit" value="Поиск">
+        <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
     </form>
 
     <table class="table table-striped mt-3">
@@ -49,7 +49,7 @@
 
     <div style="width: 100%; text-align: center">
         <br>
-        <button onclick="location.href='/vacancy/add'" class="btn btn-success">Создать вакансию</button>
+        <button onclick="location.href='/vacancy/add'" class="btn w-100 btn-lg btn-success">Создать вакансию</button>
         <br>
     </div>
 </div>

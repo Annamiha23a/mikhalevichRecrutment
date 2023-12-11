@@ -18,15 +18,13 @@
       <h1>Фирмы</h1>
     </div>
     <div class="container">
-      <form action="/firms" method="get">
+      <form action="/firms" method="get"  >
         <label for="title">Поиск по названию</label>
         <input type="text" name="title" id="title"><br>
-        <input type="submit" value="Поиск">
+        <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
       </form>
-
       <br>
-
-      <table class="table table-bordered table-hover">
+      <table class="table table-striped mt-3">
         <thead>
         <tr>
           <th>ID</th>
@@ -56,7 +54,7 @@
       <br>
       <div style="width: 100%; text-align: center">
         <br>
-        <button onclick="location.href='/firms/add'" class="btn btn-success">Создать фирму</button>
+        <button onclick="location.href='/firms/add'" class="btn w-100 btn-lg btn-success">Создать фирму</button>
         <br>
       </div>
     </div>

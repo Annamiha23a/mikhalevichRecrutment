@@ -19,7 +19,7 @@
     <div class="container">
         <div  class="alert alert-success mt-2">
 <form action="/recruters/add" method="post" >
-    <div class="col-md-7 col-lg-8">
+    <div class="col-md-7 col-lg-12">
         <h4 class="mb-3">Личные данные</h4>
             <div class="row g-3">
                 <div class="col-sm-6">
@@ -76,20 +76,20 @@
                     </div>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <label for="country" class="form-label">Страна</label>
                     <select class="form-select" id="country"  name="country" required="">
                         <option value="">Выберите...</option>
                         <option>Беларусь</option>
                         <option>Россия</option>
-                        <option>Украина</option>
+                        <option>Узбекистан</option>
                     </select>
                     <div class="invalid-feedback">
                         Выберите страну!
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <label for="age" class="form-label">Возраст</label></label>
                     <input type="text" class="form-control" id="age" name="age"  required="">
                     <div class="invalid-feedback">
@@ -100,7 +100,6 @@
 
             <hr class="my-4">
     </div>
-
     <label> Специализация</label><br>
     <input type="text" class="form-control" name="specialization"  >
     <br><label>Кол-во успешных наймов</label><br>
@@ -109,7 +108,15 @@
     <input type="text" class="form-control" name="portfolio" >
     <br><label>Спецификация</label><br>
     <input type="text" class="form-control" name="searchSpecification" >
-    <button class="btn btn-sm btn-success" type="submit">Зарегистрировать</button>
+    <br><label>Выберите фирму</label><br><br>
+    <select id="firm"  name="id_firm"  class="form-select">
+        <option value=""> Выберите </option>
+        <option th:each="firm : ${firms}"
+                th:value="${firm.getId_firm()}"
+                th:utext="${firm.getTitle()}"/>
+    </select><br>
+
+    <button class=" btn w-100 btn-lg btn-success" type="submit">Зарегистрировать рекрутера</button>
 
 </form>
         </div>

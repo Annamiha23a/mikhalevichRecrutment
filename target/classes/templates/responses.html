@@ -21,7 +21,7 @@
         <form action="/responses" method="get">
             <label for="status">Поиск по статусу</label>
             <input type="text" name="status" id="status"><br>
-            <input type="submit" value="Поиск">
+            <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
         </form>
 
         <table class="table table-striped mt-3">
@@ -50,12 +50,6 @@
             </tr>
             </tbody>
         </table>
-
-        <div style="width: 100%; text-align: center">
-            <br>
-<!--            <button onclick="location.href='/responses/add'" class="btn btn-success">Добавить рекрутора</button>-->
-            <br>
-        </div>
     </div>
 </div>
 <footer th:insert="blocks/footer :: footer"></footer>
