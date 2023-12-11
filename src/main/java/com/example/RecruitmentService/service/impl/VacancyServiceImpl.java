@@ -62,4 +62,5 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = findById(id_vacancy);
         vacancyRepository.delete(vacancy);
     }
+
 }

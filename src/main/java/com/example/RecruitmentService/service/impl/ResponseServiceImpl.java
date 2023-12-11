@@ -11,10 +11,8 @@ import com.example.RecruitmentService.service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -118,7 +116,6 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     public List<Response>  findByApplicantAndStatus(Applicant applicant, String status){
-        List<Response> responses;
         if(status!= null) {
             return responseRepository.findByApplicantAndStatus(applicant, status);
               }

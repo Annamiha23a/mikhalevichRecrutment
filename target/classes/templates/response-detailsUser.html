@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaef.org">
+<head>
+  <title>Отклик</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+
+<div class="album py-5 bg-light">
+  <div class="container mt-5">
+    <h1 th:utext="'Отклик № : '+${response.id_response}"></h1>
+  </div>
+  <div class="container">
+    <div  class="alert alert-success mt-2">
+      <h4 th:utext="'Дата отклика: '+${response.dateOfCreate}"></h4>
+      <h4 th:utext="'Статус: '+${response.status}"></h4>
+      <h4 th:utext="'Комментарий: '+${response.comment}"></h4>
+      <h2 th:utext="'Соикатель №: '+${response.applicant.id_applicant}"></h2>
+      <h4 th:utext="'Специализация: '+${response.applicant.specialization}"></h4>
+      <h4 th:utext="'Образование: '+${response.applicant.education}"></h4>
+      <h4 th:utext="'Опыт: '+${response.applicant.experience}"></h4>
+      <h4 th:utext="'Знание языков: '+${response.applicant.language}"></h4>
+      <h4 th:utext="'Рейтинг: '+${response.applicant.rating}"></h4>
+      <h2 th:utext="'Вакансия №: '+${response.vacancy.id_vacancy}"></h2>
+      <h4 th:utext="'Позиция: '+${response.vacancy.position}"></h4>
+      <h2 th:utext="'Фирма №: '+${response.vacancy.firm.id_firm}"></h2>
+      <h4 th:utext="'Название фирмы: '+${response.vacancy.firm.title}"></h4>
+      <div class="btn-group">
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
+

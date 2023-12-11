@@ -1,7 +1,9 @@
 package com.example.RecruitmentService.controller;
 
 import com.example.RecruitmentService.entity.Recruter;
+import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.service.impl.RecruterServiceImpl;
+import com.example.RecruitmentService.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 public class RecruterController {
 
     private final RecruterServiceImpl recruterServiceImpl;
+    private final UserServiceImpl userServiceImpl;
     //private final FirmServiceImpl firmServiceImpl;
 
     @GetMapping("")
@@ -49,7 +52,14 @@ public class RecruterController {
 
 
     @PostMapping("/add")
-    public String addRecruter(Recruter recruter, @RequestParam String specialization, @RequestParam Integer numberOfHires, @RequestParam String portfolio, @RequestParam String searchSpecification, Model model) throws IOException {
+    public String addRecruter(Recruter recruter, User user, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String username, @RequestParam String password, @RequestParam String phone, @RequestParam String bio, @RequestParam String  country, @RequestParam String age, @RequestParam String specialization, @RequestParam Integer numberOfHires, @RequestParam String portfolio, @RequestParam String searchSpecification, Model model) throws IOException {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhone(phone);
+        user.setBio(bio);
+        user.setAge(age);
+        userServiceImpl.saveRecruter(user, firstName, lastName, username, password, phone, bio, country, age);
+        recruter.setUser(user);
         recruterServiceImpl.saveRecruter(recruter, specialization, numberOfHires, portfolio, searchSpecification);
         List<Recruter> recruters=recruterServiceImpl.listRecruter();
         model.addAttribute("recruters", recruters);

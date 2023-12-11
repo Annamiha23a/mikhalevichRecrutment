@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -55,6 +54,20 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 		applicant.setUser(user);
 		applicantRepository.save(applicant);
+		if (user.getUsername()!=null) {
+			emailService.sendSimpleMail(details);
+		}
+
+		return userRepository.save(user);
+	}
+
+	public User saveRecruter(User user, String firstName, String lastName, String username, String password, String phone, String bio, String age, String s)  {
+		EmailDetails details = new EmailDetails(username,"Добро пожаловать на сервис оценки кинофильмов. Ваш логин:" + user.getUsername() +". Ваш пароль:"+user.getPassword(), "Регистрация на сервисе", null);
+		user.setPassword(this.bCryptPasswordEncoder.encode(password));
+		user.setActive(true);
+		Role role =  roleRepository.findByRole("ROLE_RECRUTER");
+		user.setRoles(new HashSet<>(List.of(role)));
+		userRepository.save(user);
 		if (user.getUsername()!=null) {
 			emailService.sendSimpleMail(details);
 		}

@@ -47,7 +47,7 @@
                 <td th:text="${res.vacancy.position}"></td>
                 <td th:text="${res.vacancy.firm.title}"></td>
                 <td th:text="${res.applicant.user.firstName}"></td>
-                <td th:utext="@{<a href='/responses/}+${res.getId_response()}+@{'>Подробнее</a>}"></td>
+                <td th:utext="@{<a href='/responses/my/}+${res.getId_response()}+@{'>Подробнее</a>}"></td>
             </tr>
             </tbody>
         </table>

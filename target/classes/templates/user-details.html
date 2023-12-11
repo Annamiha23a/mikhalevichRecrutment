@@ -31,6 +31,9 @@
             <br>
             <h1 th:utext="${'<strong>Активный:</strong> ' + el.isActive()}"></h1>
             <br>
+            <br>
+            <h1 th:utext="${'<strong>Роль:</strong> ' + el.getRoles()}"></h1>
+            <br>
             <form th:action="'/user/'+${el.getId()}+'/update'" method="get">
                 <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
             </form>

@@ -50,6 +50,13 @@ public class ResponseController {
 
     }
 
+    @GetMapping("/my/{id}")
+    public String findMyResponse(@PathVariable("id") Integer id, Model model) {
+        Response response = responseServiceImpl.findById(id);
+        model.addAttribute("response", response);
+        return "response-detailsUser";
+    }
+
     @PostMapping("/{id}/update/accept")
     public String acceptPesponse(@PathVariable Integer id, Model model){
         responseServiceImpl.updateStatus(id, "Одобрено");

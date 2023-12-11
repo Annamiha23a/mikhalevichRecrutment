@@ -64,7 +64,6 @@ public class VacancyController {
         model.addAttribute("vacancy", vacancy);
         return "vacancy-detailsUser";
     }
-   // /response/add
 
     @GetMapping("/vacancy/{id_vacancy}/response/add")
     public String addResponseUser(@PathVariable("id_vacancy") Integer id_vacancy, Model model, Principal principal) {
@@ -82,7 +81,13 @@ public class VacancyController {
         return "vacancyUpdate";
     }
 
-
+    @GetMapping("/vacancy/{id_vacancy}/firm")
+    public String infoFirmUser(@PathVariable("id_vacancy") Integer id_vacancy, Model model) {
+        Vacancy vacancy= vacancyServiceImpl.findById(id_vacancy);
+        Firm firm=vacancy.getFirm();
+        model.addAttribute("firm", firm);
+        return "firm-detailsUser";
+    }
     @PostMapping("/vacancy/add")
     public String addVacancy(Principal principal, Vacancy vacancy, @RequestParam("position") String position, @RequestParam("requirements") String requirements, @RequestParam("responsibilities") String responsibilities, @RequestParam("salary") Integer salary , @RequestParam String conditions, @RequestParam String keySkills, Model model) throws IOException {
         Firm firm=firmServiceImpl.getFirmByUserName(principal);
