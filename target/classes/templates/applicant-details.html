@@ -15,7 +15,7 @@
 
 <div class="album py-5 bg-light">
   <div class="container mt-5">
-    <h1>Соискатель</h1>
+    <h1 th:utext="'Соискатель №'+${applicant.id_applicant}"></h1>
   </div>
   <div class="container">
     <div  class="alert alert-success mt-2">
@@ -24,14 +24,14 @@
       <h4 th:utext="'Опыт: '+${applicant.experience}"></h4>
       <h4 th:utext="'Знание языков: '+${applicant.language}"></h4>
       <h4 th:utext="'Рейтинг: '+${applicant.rating}"></h4>
-      <div class="btn-group">
-        <form th:action="'/applicants/'+${applicant.getId_applicant}+'/update'" method="get">
-          <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
-        </form>
-        <form th:action="'/applicants/'+${applicant.getId_applicant}+'/remove'" method="post">
-          <button class="btn btn-sm btn-danger" type="submit">Удалить</button>
-        </form>
-      </div>
+<!--      <div class="btn-group">-->
+<!--        <form th:action="'/applicants/'+${applicant.getId_applicant}+'/update'" method="get">-->
+<!--          <button class="btn btn-sm btn-success" type="submit">Редактировать</button>-->
+<!--        </form>-->
+<!--        <form th:action="'/applicants/'+${applicant.getId_applicant}+'/remove'" method="post">-->
+<!--          <button class="btn btn-sm btn-danger" type="submit">Удалить</button>-->
+<!--        </form>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

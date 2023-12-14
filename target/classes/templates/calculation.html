@@ -15,15 +15,15 @@
 <br/>
 
 <main>
-    <div class="album py-5 bg-light btn btn-sm btn-success" >
+    <div class="album py-5 bg-light" >
         <table class="iksweb">
             <tbody>
             <tr>
-                <td>Оценка за резюме</td>
-                <td>Оценка за тест</td>
-                <td>Оценка за задание</td>
-                <td>Оценка за собеседование</td>
-                <td>Оценка за знание языка</td>
+                <td>Значимость оценки за резюме</td>
+                <td>Значимость оценки за тест</td>
+                <td>Значимость оценки за задание</td>
+                <td>Значимость оценки за собеседование</td>
+                <td>Значимость оценки за знание языка</td>
             </tr>
             <tr>
                 <td><input type="number" min="1" class="form-control" id="storyline">
@@ -47,6 +47,35 @@
                         Введите оценку!
                     </div></td>
             </tr>
+            <tr>
+                <td>Оценка за резюме</td>
+                <td>Оценка за тест</td>
+                <td>Оценка за задание</td>
+                <td>Оценка за собеседование</td>
+                <td>Оценка за знание языка</td>
+            </tr>
+            <tr>
+                <td><input type="number" min="1" class="form-control" id="mark1">
+                    <div class="invalid-feedback">
+                        Введите оценку!
+                    </div></td>
+                <td><input type="number" min="1" class="form-control" id="mark2">
+                    <div class="invalid-feedback">
+                        Введите оценку!
+                    </div></td>
+                <td><input type="number" min="1" class="form-control" id="mark3">
+                    <div class="invalid-feedback">
+                        Введите оценку!
+                    </div></td>
+                <td><input type="number" min="1" class="form-control" id="mark4">
+                    <div class="invalid-feedback">
+                        Введите оценку!
+                    </div></td>
+                <td><input type="number" min="1" class="form-control" id="mark5">
+                    <div class="invalid-feedback">
+                        Введите оценку!
+                    </div></td>
+            </tr>
             </tbody>
         </table>
 
@@ -55,7 +84,7 @@
         <table class="iksweb">
             <tbody>
             <tr>
-                <td>Сюжет</td>
+                <td>Оценка за резюме</td>
                 <td > <label for="res1" class="form-label">Вес оценки</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
@@ -63,28 +92,28 @@
 
             </tr>
             <tr>
-                <td>Актёрская игра</td>
+                <td>Оценка за тест</td>
                 <td > <label for="res2" class="form-label">Вес оценки</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
                         <input type="number" min="0" step="5" class="form-control" readonly id="res2"   required=""></div></td>
             </tr>
             <tr>
-                <td>Съёмка</td>
+                <td>Оценка за задание</td>
                 <td > <label for="res3" class="form-label">Вес оценки</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
                         <input type="number" min="0" step="5" class="form-control" readonly id="res3"   required=""></div></td>
             </tr>
             <tr>
-                <td>Монтаж</td>
+                <td>Оценка за собеседование</td>
                 <td> <label for="res4" class="form-label">Вес оценки</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
                         <input type="number" min="0" step="5" class="form-control" readonly id="res4"   required=""></div></td>
             </tr>
             <tr>
-                <td>Оригинальность</td>
+                <td>Оценка за знание языка</td>
                 <td> <label for="res5" class="form-label">Вес оценки</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
@@ -95,7 +124,14 @@
                 <td> <label for="res" class="form-label">Результат</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
-                        <input type="text"  class="form-control" readonly id="res"  placeholder="Price for one" required=""></div></td>
+                        <input type="text"  class="form-control" readonly id="res"   required=""></div></td>
+            </tr>
+            <tr>
+                <td>Расчитанный рейтинг</td>
+                <td> <label for="res" class="form-label">Рейтинг соискателя</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text"></span>
+                        <input type="number"  class="form-control" readonly id="rating"   required=""></div></td>
             </tr>
             </tbody>
         </table>
@@ -121,6 +157,15 @@
                     case k4:{document.getElementById('res').value = "Оценка за собеседование" ; break;}
                     case k5:{document.getElementById('res').value = "Оценка за знание языка" ; break;}
                 }
+                var m1, m2, m3, m4, m5;
+                m1=mark1.value;
+                m2=mark2.value;
+                m3=mark3.value;
+                m4=mark4.value;
+                m5=mark5.value;
+                var rating;
+                rating=k1*m1+k2*m2+k3*m3+k4*m4+k5*m5;
+                document.getElementById('rating').value = rating ;
             }
         </script>
     </div>

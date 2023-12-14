@@ -65,7 +65,7 @@
                     </ul>
                     <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
                         <li style="color: #ffffff; " class="d-inline-block">
-                            <a  >Пользователь</a>
+                            <a  >Соискатель</a>
                         </li>
                     </div>
                     <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">

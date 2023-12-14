@@ -101,6 +101,7 @@ public class ResponseServiceImpl implements ResponseService {
         if (email!=null) {
             emailService.sendSimpleMail(details);
         }
+        System.out.println("Добрый день, "+firstName +" "+ lastName+"! /n Вас приветсвует система рекрутинга. Вы оставляли заявку на вакансию "+ position + " в фирме "+firm+ "Высылаем Вам тест, пожалуйста, пройдите его. Ссылка на тест "  + test +"./n С уважением, рекрутер "+firstNameRecruter + " " + lastNameRecruter+ " !" );
     }
 
 

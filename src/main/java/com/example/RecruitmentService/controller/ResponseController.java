@@ -44,7 +44,6 @@ public class ResponseController {
         Applicant applicant=user.getApplicant();
         List<Response> responses;
         responses=responseServiceImpl.findByApplicantAndStatus(applicant, status);
-       // List<Response> responses=responseServiceImpl.listResponse(status);
         model.addAttribute("responses", responses);
         return "responseUser";
 
