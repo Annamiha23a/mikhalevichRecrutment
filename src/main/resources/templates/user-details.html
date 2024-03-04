@@ -14,29 +14,46 @@
 
 
 <div class="album py-5 bg-light">
-    <div class="container mt-5">
-        <h1>Пользователь</h1>
-    </div>
-    <div class="container">
-        <div th:each="el : ${user}" class="alert alert-success mt-2">
-            <h1 th:utext="${'<strong>Имя:</strong> ' + el.getFirstName()}"></h1>
+
+    <div th:each="el : ${user}" class="container">
+        <div class="container mt-5">
+            <h3 th:utext="${'<strong>Пользователь №:</strong> ' + el.getId()}"></h3>
+        </div>
+        <div  class="alert alert-success mt-2">
+            <h3 th:utext="${'<strong>Имя:</strong> ' + el.getFirstName()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>Фамилия:</strong> ' + el.getLastName()}"></h1>
+            <h3 th:utext="${'<strong>Фамилия:</strong> ' + el.getLastName()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>Номер телефона:</strong> ' + el.getPhone()}"></h1>
+            <h3 th:utext="${'<strong>Номер телефона:</strong> ' + el.getPhone()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>О себе:</strong> ' + el.getBio()}"></h1>
+            <h3 th:utext="${'<strong>Почта:</strong> ' + el.getUsername()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>Возраст:</strong> ' + el.getAge()}"></h1>
+            <h3 th:utext="${'<strong>О себе:</strong> ' + el.getBio()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>Активный:</strong> ' + el.isActive()}"></h1>
+            <h3 th:utext="${'<strong>Возраст:</strong> ' + el.getAge()}"></h3>
             <br>
+            <h3 th:utext="${'<strong>Активный:</strong> ' + el.isActive()}"></h3>
             <br>
-            <h1 th:utext="${'<strong>Роль:</strong> ' + el.getRoles()}"></h1>
-            <br>
-            <form th:action="'/user/'+${el.getId()}+'/update'" method="get">
-                <button class="btn w-100 btn-lg btn-success" type="submit">Редактировать</button>
-            </form>
+            <div th:each="rl : ${role}" >
+                <h3 th:utext="${'<strong>Роль:</strong> ' + rl.getTitle()}"></h3>
+                <br>
+            </div>
+            <table>
+                <tr>
+                    <th>
+                        <form th:action="'/user/'+${el.getId()}+'/update'" method="get">
+                        <button class="btn  btn-lg btn-success" type="submit">Редактировать</button>
+                        </form>
+                    </th>
+                    <th >
+                        <form th:action="'/user/'+${el.getId()}+'/update'" method="get">
+                            <button class="btn  btn-lg btn-success" type="submit">Сменить пароль</button>
+                        </form>
+                    </th>
+                </tr>
+            </table>
+
+
         </div>
     </div>
 </div>

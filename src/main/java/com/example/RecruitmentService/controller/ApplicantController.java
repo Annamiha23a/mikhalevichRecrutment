@@ -56,9 +56,20 @@ public class ApplicantController {
         model.addAttribute("applicant",applicant);
         return "applicantUpdateUser";
     }
+    @GetMapping("/choose")
+    public String chooseRating(Model model){
+        List<Applicant> applicants = applicantServiceImpl.listApplicant();
+        for(Applicant applicant: applicants){
+            System.out.println(applicant.getId_applicant());
+        }
+        model.addAttribute( "applicants", applicants);
+        return "chooseAppl";
+    }
 
-    @GetMapping("/calculation")
-    public String calculationRating(Model model){
+    @GetMapping("/calculation/{id}")
+    public String calculationRating(Model model, @PathVariable("id") Integer id){
+        Applicant applicant = applicantServiceImpl.findById(id);
+        model.addAttribute(applicant);
         return "calculation";
     }
 
@@ -109,5 +120,13 @@ public class ApplicantController {
         applicantServiceImpl.removeApplicant(id_applicant);
         model.addAttribute("applicant",applicant);
         return "applicant-detailsUser";
+    }
+
+    @PostMapping("calculation/{id}/rating")
+    public String saveRating(@PathVariable(value = "id") Integer id, Model model, @RequestParam Integer rating ){
+        Applicant applicant= applicantServiceImpl.findById(id);
+        System.out.println(applicant.getId_applicant());
+        model.addAttribute("applicant",applicant);
+        return "chooseAppl";
     }
 }

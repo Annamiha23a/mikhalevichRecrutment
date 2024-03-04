@@ -19,4 +19,7 @@ public class Role {
 
 	@Column(name = "role")
 	private String role;
+
+	@Column(name = "title")
+	private String title;
 }

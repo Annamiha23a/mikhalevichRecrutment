@@ -16,6 +16,7 @@
 
 <main>
     <div class="album py-5 bg-light" >
+        <h1 th:utext="'Соискатель №'+${applicant.id_applicant}"></h1>
         <table class="iksweb">
             <tbody>
             <tr>
@@ -80,7 +81,6 @@
         </table>
 
         <button class="w-75 btn btn-success btn-lg" type="submit" id="method"  onclick="abs(storyline.value,acting.value,shot.value,montage.value,originality.value)">Рассчитать</button>
-
         <table class="iksweb">
             <tbody>
             <tr>
@@ -131,7 +131,11 @@
                 <td> <label for="res" class="form-label">Рейтинг соискателя</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
-                        <input type="number"  class="form-control" readonly id="rating"   required=""></div></td>
+                        <form th:action="'/calculation/'+${applicant.getId_applicant}+'/rating'" method="post">
+                        <input type="number"  class="form-control" readonly id="rating" name="rating"  required="">
+                            <button class="w-75 btn btn-success btn-lg" type="submit"   >Записать в бд</button>
+                        </form>
+                    </div></td>
             </tr>
             </tbody>
         </table>

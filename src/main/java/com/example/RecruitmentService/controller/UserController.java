@@ -1,5 +1,6 @@
 package com.example.RecruitmentService.controller;
 
+import com.example.RecruitmentService.entity.Role;
 import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -36,6 +38,13 @@ public class UserController {
 		List<User> users = new ArrayList<>();
 		users.add(user);
 		model.addAttribute("user", users);
+		Set<Role> roles=user.getRoles();
+		List<Role> newroles=new ArrayList<>();
+		for(Role role:roles) {
+			System.out.println(role.getTitle());
+			newroles.add(role);
+		}
+		model.addAttribute("role", newroles);
 		return "user-details";
 	}
 
