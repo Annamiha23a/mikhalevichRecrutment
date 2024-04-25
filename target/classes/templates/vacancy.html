@@ -11,20 +11,71 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
+<style>
+    /*.filter{*/
+    /*    height: 65%;*/
+    /*    width: 250px;*/
+    /*    position: static;*/
+    /*    top: 5%;*/
+    /*    left: 0;*/
+    /*    background-color: #f8f9fa;*/
+    /*    padding-top: 20px;*/
+    /*    padding-bottom: 200px;*/
+    /*}*/
+    /*.content {*/
+    /*    margin-left: 250px;*/
+    /*    padding: 20px;*/
+    /*}*/
+    .flex {
+        display: flex;
+        flex-direction: row;
+        /*justify-content: space-between;*/
+        /*align-items: stretch;*/
+        /*height: 200px;*/
+        /*border: 5px solid black;*/
+    }
+    .filter {
+        flex: 0 0 250px;
+        background-color: #FF9999;
+        padding-top: 40px;
+    }
+    .content {
+        flex: 1 1 25%;
+        background-color: #9999FF;
+    }
+</style>
 <header th:insert="blocks/header :: header"></header>
 
-<div class="container mt-5">
+<div class="flex container mt-5" >
+<div class="filter">
+    <br><label>Фильтр</label><br><br>
+    <select id="filterSelect"   onchange="applyFilter()"  class="form-select"  >
+        <option value=""> Выберите город</option>
+        <option th:each="vacancy : ${vacancies}"
+                th:value="${vacancy.city}"
+                th:utext="${vacancy.city}"/>
+            </select><br>
+    <label for="salery1">ЗП от</label>
+    <input type="number" name="salery1" id="salery1"><br>
+    <label for="salery2">ЗП до</label>
+    <input type="number" name="salery2" id="salery2"><br>
+    <label for="resp">Кол-во откликов до</label>
+    <input type="number" name="resp" id="resp"><br>
+</div>
+
+<div class="content container">
     <h1>Вакансии</h1>
-
-
-<div class="container">
     <form action="/vacancy" method="get">
         <label for="position">Поиск по позиции</label>
         <input type="text" name="position" id="position"><br>
         <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
     </form>
-
-    <table class="table table-striped mt-3">
+    <div style="width: 100%; text-align: center">
+        <br>
+        <button onclick="location.href='/vacancy/add'" class="btn w-100 btn-lg btn-success">Опубликовать вакансию</button>
+        <br>
+    </div>
+    <table id="filteredVacancies" class="table table-striped mt-3">
         <thead>
         <tr>
             <th>ID</th>
@@ -36,24 +87,80 @@
         </tr>
         </thead>
         <tbody>
+
         <tr th:each="vac : ${vacancies}">
-            <td th:text="${vac.id_vacancy}"></td>
-            <td th:text="${vac.position}"></td>
-            <td th:text="${vac.requirements}"></td>
-            <td th:text="${vac.responsibilities}"></td>
-            <td th:text="${vac.salary}"></td>
-            <td th:utext="@{<a href='/vacancy/}+${vac.getId_vacancy()}+@{'>Подробнее</a>}"></td>
+            <th:block th:if="${#strings.isEmpty(filterValue) or vac.city == filterValue}">
+                <td th:text="${vac.id_vacancy}"></td>
+                <td th:text="${vac.position}"></td>
+                <td th:text="${vac.requirements}"></td>
+                <td th:text="${vac.responsibilities}"></td>
+                <td th:text="${vac.salary}"></td>
+                <td th:utext="@{<a href='/vacancy/}+${vac.getId_vacancy()}+@{'>Подробнее</a>}"></td>
+            </th:block>
+
         </tr>
         </tbody>
     </table>
 
-    <div style="width: 100%; text-align: center">
-        <br>
-        <button onclick="location.href='/vacancy/add'" class="btn w-100 btn-lg btn-success">Опубликовать вакансию</button>
-        <br>
-    </div>
+
 </div>
 </div>
+<script>
+    function applyFilter() {
+        // Получаем выбранное значение из селекта
+        var selectedValue = document.getElementById("filterSelect").value;
+        console.log(selectedValue);
+        // // Устанавливаем значение переменной для фильтрации
+        // document.getElementById("filterValue").value = selectedValue;
+        //updateFilteredVacancies();
+    }
+    // Функция для обновления таблицы отфильтрованных вакансий
+    function updateFilteredVacancies() {
+        // Получаем таблицу и тело таблицы
+        var table = document.getElementById("filteredVacancies").getElementsByTagName("tbody")[0];
+
+        // Очищаем текущую таблицу
+        table.innerHTML = "";
+
+        document.getElementById("filteredVacancies").innerHTML=" <thead>\n" +
+            "        <tr>\n" +
+            "            <th>ID</th>\n" +
+            "            <th>Позиция</th>\n" +
+            "            <th>Описание</th>\n" +
+            "            <th>Условия</th>\n" +
+            "            <th>Зарплата</th>\n" +
+            "            <th>Дополнительно</th>\n" +
+            "        </tr>\n" +
+            "        </thead>\n" +
+            "        <tbody>\n" +
+            "\n" +
+            "        <tr th:each=\"vac : ${vacancies}\">\n" +
+            "            <th:block th:if=\"${vac.city == filterValue}\">\n" +
+            "                <td th:text=\"${vac.id_vacancy}\"></td>\n" +
+            "                <td th:text=\"${vac.position}\"></td>\n" +
+            "                <td th:text=\"${vac.requirements}\"></td>\n" +
+            "                <td th:text=\"${vac.responsibilities}\"></td>\n" +
+            "                <td th:text=\"${vac.salary}\"></td>\n" +
+            "                <td th:utext=\"@{<a href='/vacancy/}+${vac.getId_vacancy()}+@{'>Подробнее</a>}\"></td>\n" +
+            "            </th:block>\n" +
+            "\n" +
+            "        </tr>\n" +
+            "        </tbody>";
+        // // Фильтруем список вакансий и добавляем отфильтрованные вакансии в таблицу
+        // for (var i = 0; i < ${vacancies.length}; i++) {
+        //     var vacancy = ${vacancies[i]};
+        //     if (!selectedCity || vacancy.city === selectedCity) {
+        //         // Создаем строку таблицы для каждой вакансии и добавляем ее в таблицу
+        //         var row = table.insertRow();
+        //         var titleCell = row.insertCell(0);
+        //         var cityCell = row.insertCell(1);
+        //         titleCell.textContent = vacancy.title;
+        //         cityCell.textContent = vacancy.city;
+        //     }
+        // }
+    }
+</script>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
+
 </html>

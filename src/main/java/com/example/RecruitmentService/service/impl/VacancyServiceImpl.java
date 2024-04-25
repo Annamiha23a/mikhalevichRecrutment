@@ -9,6 +9,8 @@ import com.example.RecruitmentService.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 @Service
@@ -35,11 +37,18 @@ public class VacancyServiceImpl implements VacancyService {
         vacancyRepository.save(vacancyFromDb);
     }
     @Override
+    public List<Vacancy> listVacancy(String position, Integer sal1, Integer sal2){
+        List<Vacancy> list=new ArrayList<>();
+        if(position!= null) {list=vacancyRepository.findByPositionContaining(position);}
+        else {list=vacancyRepository.findAll();}
+
+        return list;
+    }
+    @Override
     public List<Vacancy> listVacancy(String position){
-        if(position!= null) return vacancyRepository.findByPositionContaining(position);
+        if(position!= null ) return vacancyRepository.findByPositionContaining(position);
         return vacancyRepository.findAll();
     }
-
     @Override
     public List<Vacancy> listVacancy(){
         return vacancyRepository.findAll();

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface VacancyService {
     Vacancy findById(int id);
+    List<Vacancy> listVacancy(String position, Integer sal1, Integer sal2);
     List<Vacancy> listVacancy(String position);
     List<Vacancy> listVacancy();
     void saveVacancy(Vacancy vacancy, String position,  String requirements,  String responsibilities,  Integer salary, String conditions, String keySkills, Firm firm) throws IOException;

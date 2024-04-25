@@ -26,7 +26,8 @@
       <h4 th:utext="'Портфолио: '+${recruter.portfolio}"></h4>
 
       <h4 th:utext="'Спецификация поиска: '+${recruter.searchSpecification}"></h4>
-
+      <h4 th:utext="'Пользователь: '+${recruter.user.firstName+' '+ recruter.user.lastName}"></h4>
+      <h4 th:utext="'Фирма: '+${recruter.firm.title}"></h4>
       <div class="btn-group">
 
         <form th:action="'/recruters/'+${recruter.getId_recruter}+'/update'" method="get">

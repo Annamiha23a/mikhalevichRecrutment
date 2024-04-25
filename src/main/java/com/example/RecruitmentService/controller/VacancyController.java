@@ -31,8 +31,8 @@ public class VacancyController {
     private final ResponseServiceImpl responseServiceImpl;
 
     @GetMapping("/vacancy")
-    public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position) {
-        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position);
+    public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position, @RequestParam(name="salery1", required = false) Integer salery1, @RequestParam(name="salery2", required = false) Integer salery2) {
+        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position, salery1, salery2);
         model.addAttribute("vacancies", vacancies);
         return "vacancy";
     }

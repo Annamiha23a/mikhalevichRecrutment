@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import javax.persistence.*;
@@ -40,6 +42,11 @@ public class Vacancy {
     @Column(name="keySkills")
     private String keySkills;
 
+    @Column(name="city")
+    private String city;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "response")
+//    private List<Response> responses = new ArrayList<>();
     private LocalDateTime dateOfCreate;
     @PrePersist
     private void init(){
