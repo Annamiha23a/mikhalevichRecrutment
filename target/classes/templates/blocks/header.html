@@ -21,6 +21,11 @@
                                 <a class="nav-link active" aria-current="page" href="/recruters">Рекрутеры</a>
                             </li>
                         </div>
+                        <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}" class="unauthorized">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/analytics">Аналитика рынка</a>
+                            </li>
+                        </div>
 
 
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="unauthorized">

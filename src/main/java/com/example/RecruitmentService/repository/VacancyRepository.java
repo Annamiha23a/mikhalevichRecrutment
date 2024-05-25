@@ -12,6 +12,10 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Integer> {
     Optional<Vacancy> findById(int id_vacancy);
     List<Vacancy> findByPositionContaining(String position);
 
+    List<Vacancy> findByPositionContainingAndCityAndSalaryBetween(String position, String city, Integer S1, Integer S2);
+    List<Vacancy> findByCityAndSalaryBetween(String city, Integer S1, Integer S2);
+    List<Vacancy> findByCity(String city);
+    List<Vacancy> findBySalaryBetween(Integer S1, Integer S2);
 
 
 }

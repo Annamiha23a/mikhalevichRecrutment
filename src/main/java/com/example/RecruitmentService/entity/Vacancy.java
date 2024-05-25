@@ -11,6 +11,7 @@ import java.util.List;
 
 
 import javax.persistence.*;
+import javax.persistence.Id;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
@@ -45,8 +46,6 @@ public class Vacancy {
     @Column(name="city")
     private String city;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "response")
-//    private List<Response> responses = new ArrayList<>();
     private LocalDateTime dateOfCreate;
     @PrePersist
     private void init(){
@@ -59,6 +58,9 @@ public class Vacancy {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
     @JoinColumn(name="id_firm")
     private Firm firm;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_vacancy")
+//    private List<Response> responses = new ArrayList<>();
 
 }
 

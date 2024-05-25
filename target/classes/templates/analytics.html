@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaef.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Аналитика рынка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://www.google.com/jsapi"></script>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<style>
+    .sidebar {
+        display: flex;
+    }
+
+    .diagram {
+        display:block;
+
+    }
+    .stat{
+        display:block;
+    }
+    .excel{
+        padding: 20px;
+    }
+</style>
+<div class="album py-5 bg-light">
+    <div class="container mt-5">
+
+
+    <div class="container">
+        <div class="sidebar">
+        <div class="stat">
+            <h1>Аналитика рынка</h1>
+        <h4 th:utext = "'Количество пользователей: ' + ${userSize} + '. '"></h4>
+        <h4 th:utext = "'В том числе соискателей: ' + ${appSize} + ', '"></h4>
+        <h4 th:utext = "'рекрутёров: ' + ${recrSize} + '.'"></h4>
+        <h4 th:utext = "'Количество фирм: ' + ${firmSize} + '. '"></h4>
+        <h4 th:utext = "'Количество вакансий: ' + ${vacancySize} + '. '"></h4>
+        <h4 th:utext = "'Количество откликов: ' + ${responseSize} + '. '"></h4>
+    </div>
+
+
+    <div class="diagram">
+        <div id="air" style="width: 500px; height: 400px;"></div>
+    </div>
+        </div>
+    <div class="excel">
+        <form th:action="'/analyticSave'" method="get">
+            <button class="btn btn-sm btn-success" type="submit">Скачать данные в Excel</button>
+        </form>
+        <div class="form-row" th:if="${status!=null}">
+            <div class="col-sm-12">
+                <h6 th:utext="${status}"></h6><br><br>
+            </div>
+        </div>
+    </div> </div>
+    </div>
+</div>
+<script>
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Газ', 'Объём'],
+            ['Азот',     78.09],
+            ['Кислород', 20.95],
+            ['Аргон',    0.93],
+            ['Углекислый газ', 0.03]
+        ]);
+        var options = {
+            title: 'Состав воздуха',
+            is3D: true,
+            pieResidueSliceLabel: 'Остальное'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('air'));
+        chart.draw(data, options);
+    }
+</script>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
+

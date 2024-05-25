@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,9 +34,35 @@ public class VacancyController {
     @GetMapping("/vacancy")
     public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position, @RequestParam(name="salery1", required = false) Integer salery1, @RequestParam(name="salery2", required = false) Integer salery2) {
         List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position, salery1, salery2);
+        model.addAttribute("vacancyCity", vacancyServiceImpl.vacancyCity());
         model.addAttribute("vacancies", vacancies);
+        model.addAttribute("find", position);
         return "vacancy";
     }
+    @GetMapping("/vacancyFilter")
+    public String FilterVacancy(Model model, @RequestParam(name="position", required = false) String position, @RequestParam(name="city", required = false) String city, @RequestParam(name="salery1", required = false) Integer salery1, @RequestParam(name="salery2", required = false) Integer salery2, @RequestParam(name="resp", required = false) Integer resp) {
+        List<Vacancy> vacancies=new ArrayList<>();
+        if(position!=null && city!=null && salery1!=null && salery2!=null && resp!=null){
+            vacancies = vacancyServiceImpl.vacancyFilter(position, city, salery1, salery2, resp);
+        }
+        else {
+        if(city!=null && salery1!=null && salery2!=null && resp!=null){
+            vacancies = vacancyServiceImpl.vacancyFilter(city, salery1, salery2, resp);
+        }
+        else{
+        if(city!=null  && resp!=null){
+            vacancies = vacancyServiceImpl.vacancyFilter( city, resp);
+        }
+        if( salery1!=null && salery2!=null && resp!=null){
+            vacancies = vacancyServiceImpl.vacancyFilter( salery1, salery2, resp);
+        }}}
+        model.addAttribute("vacancyCity", vacancyServiceImpl.vacancyCity());
+        model.addAttribute("vacancies", vacancies);
+        model.addAttribute("find", position);
+        return "vacancy";
+    }
+
+
 
     @GetMapping("/vacancy/user")
     public String findAllVacancyUser(Model model, @RequestParam(name="position", required = false) String position) {

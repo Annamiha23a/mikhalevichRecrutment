@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 
 import javax.persistence.*;
-
+import javax.persistence.Id;
 @Entity
 @Table(name="response")
 @Data
@@ -37,7 +37,7 @@ public class Response {
     private String gitHub;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
     @JoinColumn(name="id_vacancy")
     private Vacancy vacancy;
 

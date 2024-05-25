@@ -35,39 +35,48 @@
         /*border: 5px solid black;*/
     }
     .filter {
-        flex: 0 0 250px;
-        background-color: #FF9999;
+        flex: 0 0 300px;
+        background-color: #b6efc3;
         padding-top: 40px;
     }
     .content {
         flex: 1 1 25%;
-        background-color: #9999FF;
+    }
+    .int{
+        width: 120px;
     }
 </style>
 <header th:insert="blocks/header :: header"></header>
 
 <div class="flex container mt-5" >
 <div class="filter">
-    <br><label>Фильтр</label><br><br>
-    <select id="filterSelect"   onchange="applyFilter()"  class="form-select"  >
+    <br><h3>Фильтр</h3><br>
+    <form action="/vacancyFilter" method="get">
+    <select id="filterSelect"   onchange="applyFilter()"  class="form-select"name="city"  >
         <option value=""> Выберите город</option>
-        <option th:each="vacancy : ${vacancies}"
-                th:value="${vacancy.city}"
-                th:utext="${vacancy.city}"/>
+        <option th:each="el : ${vacancyCity}"
+                th:value="${el}"
+                th:utext="${el}"/>
             </select><br>
     <label for="salery1">ЗП от</label>
-    <input type="number" name="salery1" id="salery1"><br>
+    <input class="int" type="number" name="salery1" id="salery1"><br><br>
     <label for="salery2">ЗП до</label>
-    <input type="number" name="salery2" id="salery2"><br>
+    <input class="int" type="number" name="salery2" id="salery2"><br><br>
     <label for="resp">Кол-во откликов до</label>
-    <input type="number" name="resp" id="resp"><br>
+    <input class="int" type="number" name="resp" id="resp"><br>
+        <div class="form-row" th:if="${find!=null}">
+            <input type="text"  th:value="${find}" name="position" style="opacity: 0" >
+        </div>
+<br>
+        <button class="btn w-100 btn-lg btn-success" type="submit">Фильтрация</button>
+    </form>
 </div>
 
 <div class="content container">
     <h1>Вакансии</h1>
     <form action="/vacancy" method="get">
-        <label for="position">Поиск по позиции</label>
-        <input type="text" name="position" id="position"><br>
+            <label for="position">Поиск по позиции</label>
+            <input type="text" name="position" id="position"  th:value="${find?:''}" ><br>
         <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
     </form>
     <div style="width: 100%; text-align: center">

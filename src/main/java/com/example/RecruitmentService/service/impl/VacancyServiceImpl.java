@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+
 @Service
 public class VacancyServiceImpl implements VacancyService {
 
@@ -72,4 +71,46 @@ public class VacancyServiceImpl implements VacancyService {
         vacancyRepository.delete(vacancy);
     }
 
+    public List<String> vacancyCity(){
+        List<String> list = new ArrayList<>() ;
+        List<Vacancy> vacancies =vacancyRepository.findAll();
+
+        for(Vacancy vacancy: vacancies){
+            String city = vacancy.getCity();
+             list.add(city);
+
+        }
+        Set<String> setCity= new HashSet<>(list);
+        list.clear();
+        for(String str: setCity){
+            list.add(str);
+        }
+        return list;
+    }
+
+    public List<Vacancy> vacancyFilter(String position, String city, Integer S1, Integer S2, Integer R){
+        List<Vacancy> list= new ArrayList<>();
+        List<Vacancy> newlist= new ArrayList<>();
+        list=vacancyRepository.findByPositionContainingAndCityAndSalaryBetween(position, city, S1, S2);
+        for(Vacancy vacancy: list){
+
+        }
+        return list;
+    }
+    public List<Vacancy> vacancyFilter(String city, Integer S1, Integer S2, Integer R){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findByCityAndSalaryBetween(city, S1, S2);
+        return list;
+    }
+    public List<Vacancy> vacancyFilter(String city,  Integer R){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findByCity(city);
+        return list;
+    }
+
+    public List<Vacancy> vacancyFilter(Integer S1, Integer S2, Integer R){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findBySalaryBetween(S1, S2);
+        return list;
+    }
 }
