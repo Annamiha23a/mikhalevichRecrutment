@@ -20,8 +20,13 @@
 
     <div class="container">
         <form action="/responses/my" method="get">
-            <label for="status">Фильтрация по статусу</label>
-            <input type="text" name="status" id="status"><br>
+            <select class="form-select" id="country" name="status"  >
+                <option value="">Фильтрация по статусу</option>
+                <option>Просмотрено</option>
+                <option>Не просмотрено</option>
+                <option>Одобрено</option>
+                <option>Отказано</option>
+            </select>
             <button class="btn w-25 btn-lg btn-success" type="submit">Поиск</button>
         </form>
 
