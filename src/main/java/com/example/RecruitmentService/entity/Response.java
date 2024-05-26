@@ -38,7 +38,7 @@ public class Response {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)
-    @JoinColumn(name="id_vacancy")
+    @JoinColumn(name="vacancy")
     private Vacancy vacancy;
 
     @OneToOne(cascade = CascadeType.REFRESH, fetch =FetchType.LAZY)

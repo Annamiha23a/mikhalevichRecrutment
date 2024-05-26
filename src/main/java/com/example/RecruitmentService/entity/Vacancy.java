@@ -59,8 +59,8 @@ public class Vacancy {
     @JoinColumn(name="id_firm")
     private Firm firm;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id_vacancy")
-//    private List<Response> responses = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "vacancy")
+    private List<Response> responses = new ArrayList<>();
 
 }
 
