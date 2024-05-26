@@ -131,9 +131,9 @@
                 <td> <label for="res" class="form-label">Рейтинг соискателя</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text"></span>
-                        <form th:action="'/calculation/'+${applicant.getId_applicant}+'/rating'" method="post">
-                        <input type="number"  class="form-control" readonly id="rating" name="rating"  required="">
-                            <button class="w-75 btn btn-success btn-lg" type="submit"   >Записать в бд</button>
+                        <form th:action="'/applicants/calculation/'+${applicant.getId_applicant}+'/rating'" method="post">
+                        <input type="number" step="2" class="form-control" readonly id="rating" name="rating"  required="">
+                            <button class="w-100 btn btn-success btn-lg" type="submit"   >Записать в бд</button>
                         </form>
                     </div></td>
             </tr>
@@ -148,11 +148,11 @@
                 k3 /= sum;
                 k4 /= sum;
                 k5 /= sum;
-                document.getElementById('res1').value = k1 ;
-                document.getElementById('res2').value = k2 ;
-                document.getElementById('res3').value = k3 ;
-                document.getElementById('res4').value = k4 ;
-                document.getElementById('res5').value = k5 ;
+                document.getElementById('res1').value = k1.toFixed(2) ;
+                document.getElementById('res2').value = k2.toFixed(2) ;
+                document.getElementById('res3').value = k3.toFixed(2) ;
+                document.getElementById('res4').value = k4.toFixed(2) ;
+                document.getElementById('res5').value = k5.toFixed(2) ;
                 var max=Math.max(k1, k2, k3, k4, k5);
                 switch (max){
                     case k1:{document.getElementById('res').value = "Оценка за резюме"; break; }
@@ -169,7 +169,7 @@
                 m5=mark5.value;
                 var rating;
                 rating=k1*m1+k2*m2+k3*m3+k4*m4+k5*m5;
-                document.getElementById('rating').value = rating ;
+                document.getElementById('rating').value = rating.toFixed(2) ;
             }
         </script>
     </div>

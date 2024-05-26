@@ -2,6 +2,7 @@ package com.example.RecruitmentService.controller;
 
 import com.example.RecruitmentService.entity.Applicant;
 import com.example.RecruitmentService.entity.Recruter;
+import com.example.RecruitmentService.entity.Role;
 import com.example.RecruitmentService.entity.User;
 import com.example.RecruitmentService.service.impl.ApplicantServiceImpl;
 import com.example.RecruitmentService.service.impl.UserServiceImpl;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -79,6 +81,12 @@ public class ApplicantController {
         Integer id=user.getApplicant().getId_applicant();
         Applicant applicant= applicantServiceImpl.findById(id);
         model.addAttribute("applicant", applicant);
+        List<Role> roles = new ArrayList<>();
+        for (Role role : user.getRoles()) {
+            // Действия с каждым элементом role
+            System.out.println(role.getRole());
+            roles.add(role);
+        }
         return "applicant-detailsUser";
     }
 
@@ -122,11 +130,12 @@ public class ApplicantController {
         return "applicant-detailsUser";
     }
 
-    @PostMapping("calculation/{id}/rating")
-    public String saveRating(@PathVariable(value = "id") Integer id, Model model, @RequestParam Integer rating ){
-        Applicant applicant= applicantServiceImpl.findById(id);
+    @PostMapping("/calculation/{id}/rating")
+    public String saveRating(@PathVariable(value = "id") Integer id, Model model, @RequestParam Double rating ){
+        applicantServiceImpl.updateRating(id, rating);
+        Applicant applicant = applicantServiceImpl.findById(id);
         System.out.println(applicant.getId_applicant());
         model.addAttribute("applicant",applicant);
-        return "chooseAppl";
+        return "applicant-details";
     }
 }

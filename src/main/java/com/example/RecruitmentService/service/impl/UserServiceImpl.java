@@ -123,5 +123,16 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByUsername(username).orElseThrow(()->new NoSuchElementException());
 	}
 
+	public User changingPassword(int id, String password)  {
+		User user = userRepository.findUserById(id).orElseThrow(()->new NoSuchElementException());
+		EmailDetails details = new EmailDetails(user.getUsername(),"Пароль успешно изменён. Ваш новый пароль:"+password, "Смена пароля", null);
+		user.setPassword(this.bCryptPasswordEncoder.encode(password));
+		userRepository.save(user);
+		if (user.getUsername()!=null) {
+			emailService.sendSimpleMail(details);
+		}
+		return userRepository.save(user);
+	}
+
 
 }

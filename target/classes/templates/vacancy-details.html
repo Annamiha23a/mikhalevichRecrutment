@@ -21,6 +21,7 @@
         <div  class="alert alert-success mt-2">
             <h4 th:utext="'Позиция: '+${vacancy.position}"></h4>
             <h4 th:utext="'Город: '+${vacancy.city}"></h4>
+            <h4 th:utext="'Количество откликов: '+${vacancy.responses.size?:0}"></h4>
             <h4 th:utext="'Описание: '+${vacancy.requirements}"></h4>
             <h4 th:utext="'Условия: '+${vacancy.responsibilities}"></h4>
             <h4 th:utext="'ЗП: '+${vacancy.salary}"></h4>
@@ -29,13 +30,22 @@
             <h4 th:utext="'Дата опубликования вакансии: '+${vacancy.dateOfCreate}"></h4>
             <h4 th:utext="'Фирма: '+${vacancy.firm.title}"></h4>
 
-            <div class="btn-group">
+            <div  th:if="${#authorization.expression('hasAuthority(''ROLE_RECRUTER'')')}" class="btn-group">
 
                 <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/update'" method="get">
                     <button class="btn btn-sm btn-success" type="submit">Редактировать</button>
                 </form>
                 <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/remove'" method="post">
                     <button class="btn btn-sm btn-danger" type="submit">Удалить</button>
+                </form>
+            </div>
+            <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="btn-group">
+
+                <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/response/add'" method="get">
+                    <button class="btn btn-sm btn-success" type="submit">Откликнуться</button>
+                </form>
+                <form th:action="'/vacancy/'+${vacancy.getId_vacancy}+'/firm'" method="get">
+                    <button class="btn btn-sm btn-success" type="submit">Просмотреть фирму</button>
                 </form>
             </div>
         </div>

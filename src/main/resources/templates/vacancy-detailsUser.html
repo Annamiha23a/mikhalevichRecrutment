@@ -20,6 +20,8 @@
     <div class="container">
         <div  class="alert alert-success mt-2">
             <h4 th:utext="'Позиция: '+${vacancy.position}"></h4>
+            <h4 th:utext="'Город: '+${vacancy.city}"></h4>
+            <h4 th:utext="'Количество откликов: '+${vacancy.responses.size?:0}"></h4>
             <h4 th:utext="'Описание: '+${vacancy.requirements}"></h4>
             <h4 th:utext="'Условия: '+${vacancy.responsibilities}"></h4>
             <h4 th:utext="'ЗП: '+${vacancy.salary}"></h4>

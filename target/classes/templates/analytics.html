@@ -18,39 +18,45 @@
         display: flex;
     }
 
-    .diagram {
+    .diagram1 {
         display:block;
-
+        width: 500px;
+    }
+    .diagram2 {
+        display:block;
+        width: 600px;
     }
     .stat{
         display:block;
+        width: 300px;
     }
     .excel{
         padding: 20px;
     }
+    .mycontainer{
+        padding: 30px;
+    }
 </style>
 <div class="album py-5 bg-light">
-    <div class="container mt-5">
-
-
-    <div class="container">
+    <div class="mycontainer mt-5">
         <div class="sidebar">
         <div class="stat">
             <h1>Аналитика рынка</h1>
         <h4 th:utext = "'Количество пользователей: ' + ${userSize} + '. '"></h4>
-        <h4 th:utext = "'В том числе соискателей: ' + ${appSize} + ', '"></h4>
-        <h4 th:utext = "'рекрутёров: ' + ${recrSize} + '.'"></h4>
+        <h4>В том числе:</h4>
+        <h4 th:utext = "'соискателей – ' + ${appSize} + ', '"></h4>
+        <h4 th:utext = "'рекрутёров – ' + ${recrSize} + '.'"></h4>
         <h4 th:utext = "'Количество фирм: ' + ${firmSize} + '. '"></h4>
         <h4 th:utext = "'Количество вакансий: ' + ${vacancySize} + '. '"></h4>
         <h4 th:utext = "'Количество откликов: ' + ${responseSize} + '. '"></h4>
     </div>
 
 
-    <div class="diagram">
+    <div class="diagram1">
         <div id="air" style="width: 500px; height: 400px;"></div>
     </div>
-            <div class="diagram">
-                <div id="air2" style="width: 500px; height: 400px;"></div>
+            <div class="diagram2">
+                <div id="oil" style="width: 600px; height: 400px;"></div>
             </div>
         </div>
     <div class="excel">
@@ -62,7 +68,7 @@
                 <h6 th:utext="${status}"></h6><br><br>
             </div>
         </div>
-    </div> </div>
+    </div>
     </div>
 </div>
 <script>
@@ -70,37 +76,34 @@
     google.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-            ['Газ', 'Объём'],
-            ['Азот',     78.09],
-            ['Кислород', 20.95],
-            ['Аргон',    0.93],
-            ['Углекислый газ', 0.03]
+            ['Фирма', 'Количество вакансий'],
+            ['Лучшая фирма',     5],
+            ['ОАО Звезда', 3],
+            ['ОАО Победа',    1],
+            ['ОАО Утренняя звезда', 1]
         ]);
         var options = {
-            title: 'Состав воздуха',
+            title: 'Соотношение вакансий фирм',
             is3D: true,
-            pieResidueSliceLabel: 'Остальное'
+            pieResidueSliceLabel: 'Остальные'
         };
         var chart = new google.visualization.PieChart(document.getElementById('air'));
         chart.draw(data, options);
-    }
-
-
-    google.setOnLoadCallback(drawChart2);
-    function drawChart2() {
-        var data = google.visualization.arrayToDataTable([
-            ['Год', 'Россия', 'США'],
-            ['1860', 1.3, 70],
-            ['1885', 2000, 3120],
-            ['1901', 12170, 9920]
+        // 2
+        var data2 = google.visualization.arrayToDataTable([
+            ['День', 'Вакансий', 'Соискателей'],
+            ['19.05.2024', 1, 0],
+            ['20.05.2024', 2, 1],
+            ['21.05.2024', 3, 1],
+            ['22.05.2024', 4, 2]
         ]);
-        var options = {
-            title: 'Добыча нефти',
-            hAxis: {title: 'Год'},
-            vAxis: {title: 'Тыс. тонн'}
+        var options2 = {
+            title: 'Количество новых вакансий и соискателей по дням',
+            hAxis: {title: 'День'},
+            vAxis: {title: 'Шт.'}
         };
-        var chart = new google.visualization.ColumnChart(document.getElementById('oil2'));
-        chart.draw(data, options);
+        var chart2 = new google.visualization.ColumnChart(document.getElementById('oil'));
+        chart2.draw(data2, options2);
     }
 </script>
 <footer th:insert="blocks/footer :: footer"></footer>

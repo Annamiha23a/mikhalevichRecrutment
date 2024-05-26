@@ -107,10 +107,31 @@ public class VacancyServiceImpl implements VacancyService {
         list=vacancyRepository.findByCity(city);
         return list;
     }
+    public List<Vacancy> vacancyFilter(String city){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findByCity(city);
+        return list;
+    }
 
     public List<Vacancy> vacancyFilter(Integer S1, Integer S2, Integer R){
         List<Vacancy> list= new ArrayList<>();
         list=vacancyRepository.findBySalaryBetween(S1, S2);
+        return list;
+    }
+    public List<Vacancy> vacancyFilter(Integer S1, Integer S2){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findBySalaryBetween(S1, S2);
+        return list;
+    }
+
+    public List<Vacancy> vacancyFilterBefor(Integer S1){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findBySalaryBefore(S1);
+        return list;
+    }
+    public List<Vacancy> vacancyFilterAfter(Integer S2){
+        List<Vacancy> list= new ArrayList<>();
+        list=vacancyRepository.findBySalaryAfter(S2);
         return list;
     }
 }

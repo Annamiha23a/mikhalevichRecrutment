@@ -17,5 +17,7 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Integer> {
     List<Vacancy> findByCity(String city);
     List<Vacancy> findBySalaryBetween(Integer S1, Integer S2);
 
+    List<Vacancy> findBySalaryBefore(Integer S1);
+    List<Vacancy> findBySalaryAfter(Integer S2);
 
 }

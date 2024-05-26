@@ -32,8 +32,8 @@ public class VacancyController {
     private final ResponseServiceImpl responseServiceImpl;
 
     @GetMapping("/vacancy")
-    public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position, @RequestParam(name="salery1", required = false) Integer salery1, @RequestParam(name="salery2", required = false) Integer salery2) {
-        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position, salery1, salery2);
+    public String findAllVacancy(Model model, @RequestParam(name="position", required = false) String position) {
+        List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position);
         model.addAttribute("vacancyCity", vacancyServiceImpl.vacancyCity());
         model.addAttribute("vacancies", vacancies);
         model.addAttribute("find", position);
@@ -55,7 +55,22 @@ public class VacancyController {
         }
         if( salery1!=null && salery2!=null && resp!=null){
             vacancies = vacancyServiceImpl.vacancyFilter( salery1, salery2, resp);
-        }}}
+        }}
+        if(city!=null ) {
+            vacancies = vacancyServiceImpl.vacancyFilter( city);
+        }
+            if( salery1!=null && salery2!=null){
+                vacancies = vacancyServiceImpl.vacancyFilter( salery1, salery2);
+            }
+            else {
+                if( salery1!=null ){
+                    vacancies = vacancyServiceImpl.vacancyFilterAfter(salery1);
+                }
+                if( salery2!=null ){
+                    vacancies = vacancyServiceImpl.vacancyFilterBefor( salery2);
+                }
+            }
+        }
         model.addAttribute("vacancyCity", vacancyServiceImpl.vacancyCity());
         model.addAttribute("vacancies", vacancies);
         model.addAttribute("find", position);
@@ -64,10 +79,12 @@ public class VacancyController {
 
 
 
-    @GetMapping("/vacancy/user")
+    @GetMapping("/vacancyUser")
     public String findAllVacancyUser(Model model, @RequestParam(name="position", required = false) String position) {
         List<Vacancy> vacancies=vacancyServiceImpl.listVacancy(position);
         model.addAttribute("vacancies", vacancies);
+        model.addAttribute("vacancyCity", vacancyServiceImpl.vacancyCity());
+        model.addAttribute("find", position);
         return "vacancyUser";
     }
 

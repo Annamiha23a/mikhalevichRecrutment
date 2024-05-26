@@ -57,7 +57,7 @@
                         </div>
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/vacancy/user">Вакансии</a>
+                                <a class="nav-link active" aria-current="page" href="/vacancyUser">Вакансии</a>
                             </li>
                         </div>
                         <div th:if="${#authorization.expression('hasAuthority(''ROLE_USER'')')}" class="unauthorized">
