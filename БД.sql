@@ -47,13 +47,11 @@ CREATE TABLE IF NOT EXISTS `db_kursach_7`.`recruter` (
   `numberOfHires` INT NULL DEFAULT NULL,
   `portfolio` VARCHAR(45) NULL DEFAULT NULL,
   `search_speciafication` VARCHAR(45) NULL DEFAULT NULL,
-  `id_users` INT NOT NULL ,
+  `id_user` INT NOT NULL ,
   `id_firm` INT NOT NULL,
-  `users_id_users` INT NOT NULL,
   PRIMARY KEY (`id_recruter`),
-  INDEX `R_s_idx` (`id_users` ASC) VISIBLE,
-  INDEX `r_f_idx` (`id_firm` ASC) VISIBLE,
-  INDEX `fk_recruter_users1_idx` (`users_id_users` ASC) VISIBLE)
+  INDEX `R_s_idx` (`id_user` ASC) VISIBLE,
+  INDEX `r_f_idx` (`id_firm` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
